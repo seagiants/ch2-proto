@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://StartButton.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 412.199
+margin_top = 243.881
+margin_right = 634.199
+margin_bottom = 382.881
+text = "START"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
