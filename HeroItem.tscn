@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/ch2-hero.png" type="Texture" id=1]
+
+[node name="HeroItem" type="TextureRect"]
+anchor_right = 0.182
+anchor_bottom = 0.358
+margin_right = -186.368
+margin_bottom = -214.8
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
