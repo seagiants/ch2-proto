@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://StartButton.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://ServerCreation.gd" type="Script" id=3]
+[ext_resource path="res://ClientButton.gd" type="Script" id=4]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 2 )
@@ -13,6 +15,28 @@ margin_right = 636.199
 margin_bottom = 382.881
 text = "START"
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ServerCreation" type="Button" parent="."]
+margin_left = 18.5762
+margin_top = 143.543
+margin_right = 126.576
+margin_bottom = 163.543
+text = "Create a server"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClientButton" type="Button" parent="."]
+margin_left = 20.2649
+margin_top = 182.384
+margin_right = 153.265
+margin_bottom = 202.384
+text = "Connect as a client"
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
