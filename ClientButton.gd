@@ -1,6 +1,6 @@
 extends Button
 
-var SERVER_IP = "127.0.0.1"
+var SERVER_IP = "0.0.0.0"
 var SERVER_PORT = 9000
 
 func _pressed():

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://StartButton.gd" type="Script" id=1]
+[ext_resource path="res://GoToLobbyButton.gd" type="Script" id=2]
 
 [node name="MainMenu" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -12,6 +13,17 @@ margin_right = 636.199
 margin_bottom = 382.881
 text = "START"
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoToLobbyButton" type="Button" parent="."]
+margin_left = 482.98
+margin_top = 65.8609
+margin_right = 551.98
+margin_bottom = 105.861
+text = "To Lobby"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

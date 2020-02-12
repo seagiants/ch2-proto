@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ServerCreation.gd" type="Script" id=1]
+[ext_resource path="res://Lobby.gd" type="Script" id=2]
+[ext_resource path="res://ClientButton.gd" type="Script" id=3]
+
+[node name="Lobby" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ServerButton" type="Button" parent="."]
+margin_left = 30.2205
+margin_top = 45.3307
+margin_right = 138.221
+margin_bottom = 65.3307
+text = "Create a server"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClientButton" type="Button" parent="."]
+margin_left = 207.766
+margin_top = 47.2196
+margin_right = 340.766
+margin_bottom = 67.2196
+text = "Connect as a client"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LobbyInfoBox" type="RichTextLabel" parent="."]
+margin_left = 32.0
+margin_top = 104.0
+margin_right = 339.0
+margin_bottom = 302.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
