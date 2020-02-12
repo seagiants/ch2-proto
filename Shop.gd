@@ -15,7 +15,7 @@ func on_hero_item_selected_shop(hi):
 	$PlayerBoardPanel/PlayerBoard.add_hero_item(hi)
 	$Log.text=$Log.text + "\nAchat d'un héros"
 
-func on_equip_item_selected_shop(hi):
+func on_equip_item_selected_shop(_hi):
 	$Log.text=$Log.text + "\nAchat d'un equipement"
 
 func on_hero_item_selected_playerboard(_hi):
