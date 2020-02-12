@@ -3,6 +3,7 @@
 [ext_resource path="res://StartButton.gd" type="Script" id=1]
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2( -1, 0 )
 
 [node name="StartButton" type="Button" parent="."]
 margin_left = 414.199
