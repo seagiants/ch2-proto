@@ -2,6 +2,7 @@ extends HBoxContainer
 
 signal hero_item_selected_playerboard(hi)
 
+var coin = 5
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -22,3 +23,6 @@ func add_hero_item(hi):
 func on_gui_input(event,hi):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		emit_signal("hero_item_selected_playerboard",hi)
+
+func get_coin():
+	return coin
