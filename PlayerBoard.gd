@@ -26,9 +26,11 @@ func on_gui_input(event,hi):
 func get_coin():
 	return coin
 
+#Utiliser pour changer les conditions d'acceptation d'un drag&drop pour un HeroItem
 func check_coin(cost):
 	return int(cost) <= coin
 
+#On met à jour coin et on passe l'info pour que le PlayerBoardPanel mette à jour le coinLabel
 func on_item_equipped(eicost):
 	coin -= int(eicost)
 	emit_signal("equip_on_hero_item",eicost)
