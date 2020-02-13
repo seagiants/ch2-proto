@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://HeroShop.gd" type="Script" id=1]
 [ext_resource path="res://PlayerBoard.gd" type="Script" id=2]
 [ext_resource path="res://Shop.gd" type="Script" id=3]
 [ext_resource path="res://EquipShop.gd" type="Script" id=4]
+[ext_resource path="res://PlayerBoardPanel.gd" type="Script" id=5]
+[ext_resource path="res://coinLabel.gd" type="Script" id=6]
 
 [node name="Shop" type="VBoxContainer"]
 margin_left = 3.0
@@ -74,6 +76,7 @@ rect_min_size = Vector2( 10, 10 )
 margin_top = 88.0
 margin_right = 1022.0
 margin_bottom = 114.0
+script = ExtResource( 5 )
 
 [node name="InfoPanel" type="HBoxContainer" parent="PlayerBoardPanel"]
 margin_right = 1022.0
@@ -95,6 +98,7 @@ margin_bottom = 14.0
 margin_left = 159.0
 margin_right = 159.0
 margin_bottom = 14.0
+script = ExtResource( 6 )
 
 [node name="PlayerBoard" type="HBoxContainer" parent="PlayerBoardPanel"]
 margin_top = 26.0

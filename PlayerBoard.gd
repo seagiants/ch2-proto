@@ -1,12 +1,9 @@
 extends HBoxContainer
 
 signal hero_item_selected_playerboard(hi)
+signal equip_on_hero_item(eicost)
 
-var coin = 5
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+export var coin = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +15,9 @@ func _ready():
 #	pass
 func add_hero_item(hi):
 	add_child(hi)
+	hi.equippable = funcref(self,"check_coin")
 	hi.connect("gui_input",self,"on_gui_input",[hi])
+	hi.connect("item_equipped",self,"on_item_equipped")
 
 func on_gui_input(event,hi):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
@@ -26,3 +25,10 @@ func on_gui_input(event,hi):
 
 func get_coin():
 	return coin
+
+func check_coin(cost):
+	return int(cost) <= coin
+
+func on_item_equipped(eicost):
+	coin -= int(eicost)
+	emit_signal("equip_on_hero_item",eicost)

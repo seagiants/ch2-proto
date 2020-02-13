@@ -4,10 +4,13 @@ var coinText = " PO"
 
 # Just connect the nodes.
 func _ready():
-	$HeroShopPanel/HeroShop.connect("hero_item_selected_shop",self,"on_hero_item_selected_shop")
-	$PlayerBoardPanel/PlayerBoard.connect("hero_item_selected_playerboard",self,"on_hero_item_selected_playerboard")
-	$EquipShopPanel/EquipShop.connect("equip_item_selected_shop",self,"on_equip_item_selected_shop")
-	$PlayerBoardPanel/InfoPanel/coinLabel.text = str(5)+coinText
+	if $HeroShopPanel/HeroShop.connect("hero_item_selected_shop",self,"on_hero_item_selected_shop") != OK:
+		print("pb lors de la connexion hero_item_selected_shop au shop")
+	if $PlayerBoardPanel/PlayerBoard.connect("hero_item_selected_playerboard",self,"on_hero_item_selected_playerboard") != OK:
+		print("pb lors de la connexion hero_item_selected_playerboard au shop")
+	if $EquipShopPanel/EquipShop.connect("equip_item_selected_shop",self,"on_equip_item_selected_shop") != OK:
+		print("pb lors de la connexion equip_item_selected_shop au shop")
+	$PlayerBoardPanel/InfoPanel/coinLabel.set_new_coin(get_coin())
 
 
 func on_hero_item_selected_shop(hi):
