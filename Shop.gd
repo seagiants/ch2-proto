@@ -1,7 +1,5 @@
 extends VBoxContainer
 
-var coinText = " PO"
-
 # Just connect the nodes.
 func _ready():
 	if $HeroShopPanel/HeroShop.connect("hero_item_selected_shop",self,"on_hero_item_selected_shop") != OK:

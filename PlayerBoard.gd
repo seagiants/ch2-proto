@@ -3,7 +3,7 @@ extends HBoxContainer
 signal hero_item_selected_playerboard(hi)
 signal equip_on_hero_item(eicost)
 
-export var coin = 0
+export var coin = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
