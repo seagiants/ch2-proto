@@ -53,7 +53,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="EquipShopPanel"]
 margin_right = 1022.0
 margin_bottom = 14.0
-text = "This the equipment shop !"
+text = "Drag item to the hero you want to equip."
 
 [node name="EquipShop" type="HBoxContainer" parent="EquipShopPanel"]
 margin_top = 26.0

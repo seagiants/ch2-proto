@@ -20,3 +20,4 @@ func add_hero_item(hi):
 func remove_hero_item(hi):
 	hi.disconnect("gui_input",self,"on_gui_input")
 	remove_child(hi)
+	

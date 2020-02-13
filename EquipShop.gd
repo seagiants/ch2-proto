@@ -13,7 +13,8 @@ signal equip_item_selected_shop(hi)
 #	}
 #}
 
-var EquipItem = preload("res://EquipItem.tscn")
+const EquipItem = preload("res://EquipItem.tscn")
+const EquipItemContainer = preload("res://EquipItemContainer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var lib = load_equip_lib()
@@ -23,7 +24,10 @@ func _ready():
 		add_equip_item(ei)
 
 func add_equip_item(ei):
-	add_child(ei)
+	var container = EquipItemContainer.instance()
+	container.add_child(ei)
+	add_child(container)
+	ei.parentName = (container.get_name())
 	ei.connect("gui_input",self,"on_gui_input",[ei])
 
 func on_gui_input(event,hi):
@@ -32,7 +36,8 @@ func on_gui_input(event,hi):
 
 func remove_equip_item(ei):
 	ei.disconnect("gui_input",self,"on_gui_input")
-	remove_child(ei)
+	ei.get_parent().free()
+	#remove_child(ei)
 	
 func load_equip_lib():
 	var save_game = File.new()
