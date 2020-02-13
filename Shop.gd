@@ -1,5 +1,5 @@
 extends VBoxContainer
-
+	
 # Just connect the nodes.
 func _ready():
 	if $HeroShopPanel/HeroShop.connect("hero_item_selected_shop",self,"on_hero_item_selected_shop") != OK:
@@ -10,7 +10,7 @@ func _ready():
 		print("pb lors de la connexion hero_item_selected_playerboard au shop")
 	if $EquipShopPanel/EquipShop.connect("equip_item_selected_shop",self,"on_equip_item_selected_shop") != OK:
 		print("pb lors de la connexion equip_item_selected_shop au shop")
-	$PlayerBoardPanel/InfoPanel/coinLabel.set_new_coin(get_coin())
+		$PlayerBoardPanel/InfoPanel/coinLabel.set_new_coin(playerState.get_coin())
 
 
 func on_hero_item_selected_shop(hi):
@@ -27,5 +27,3 @@ func on_hero_item_selected_playerboard(_hi):
 func on_max_hero_picked():
 	$Log.text=$Log.text + "\nAssez de héros pour l'instant."
 
-func get_coin():
-	return $PlayerBoardPanel/PlayerBoard.get_coin()

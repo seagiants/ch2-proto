@@ -2,9 +2,9 @@ extends VSplitContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PlayerBoard.connect("equip_on_hero_item",self,"on_equip_on_hero_item")
-	print($PlayerBoard.coin)
-	$InfoPanel/coinLabel.set_new_coin($PlayerBoard.coin)
+	if $PlayerBoard.connect("equip_on_hero_item",self,"on_equip_on_hero_item") != OK :
+		print("Impossible de se connecter au PlayerBoard")
+	$InfoPanel/coinLabel.set_new_coin(playerState.get_coin())
 	
 func on_equip_on_hero_item(_ei):
-	$InfoPanel/coinLabel.set_new_coin($PlayerBoard.coin)
+	$InfoPanel/coinLabel.set_new_coin(playerState.get_coin())
