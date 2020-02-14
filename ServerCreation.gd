@@ -1,7 +1,7 @@
 extends Button
 
-signal fucking_signal
+signal create_server
 
 func _pressed():
-	emit_signal("fucking_signal")
+	emit_signal("create_server")
 
