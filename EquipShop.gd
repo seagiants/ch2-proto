@@ -2,16 +2,16 @@ extends Control
 
 signal equip_item_selected_shop(hi)
 
-#const Equip_Lib = {
-#	"Sword" : {
-#		"cost" : "1",
-#		"path" : "res://assets/sword.png"
-#	},
-#	"Axe" : {
-#		"cost": "2",
-#		"path" : "res://assets/axe2.png"
-#	}
-#}
+const Equip_Lib = {
+	"Sword" : {
+		"cost" : "1",
+		"path" : "res://assets/sword.png"
+	},
+	"Axe" : {
+		"cost": "2",
+		"path" : "res://assets/axe2.png"
+	}
+}
 
 const EquipItem = preload("res://EquipItem.tscn")
 const EquipItemContainer = preload("res://EquipItemContainer.tscn")
@@ -41,9 +41,9 @@ func remove_equip_item(ei):
 	
 func load_equip_lib():
 	var save_game = File.new()
-	save_game.open("res://lib/new.lib", File.READ)
-	#save_game.open("res://lib/new.lib", File.WRITE)
-	#save_game.store_line(to_json(Equip_Lib))
+	save_game.open("res://lib/EquipLib.tres", File.READ)
+#	save_game.open("res://lib/EquipLib.tres", File.WRITE)
+#	save_game.store_line(to_json(Equip_Lib))
 	var node_data = parse_json(save_game.get_line())
 	save_game.close()
 	return node_data
