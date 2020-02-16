@@ -13,9 +13,8 @@ func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")	
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	
-func _player_connected():
-	$LobbyInfoBox.text += "a player has connected to the game"
-	print("a player has connected to the game")
+func _player_connected(connected_player_id):
+	$LobbyInfoBox.text += "Player %s connected" % connected_player_id
 
 func _connected_fail():
 	$LobbyInfoBox.text += "Connection failed\n"
