@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 playerState="*res://playerState.gd"
+HeroLib="*res://lib/HeroLib.gd"
 
 [rendering]
 

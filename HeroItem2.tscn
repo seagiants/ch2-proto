@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://HeroItem2.gd" type="Script" id=1]
+[ext_resource path="res://statLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ActionHeroPanel.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.486275, 0.482353, 0.482353, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.701961, 0.705882, 0.72549, 1 )
+
+[node name="PanelContainerRoot" type="PanelContainer"]
+margin_right = 47.0
+margin_bottom = 79.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+margin_right = 84.0
+margin_bottom = 165.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer"]
+margin_right = 84.0
+margin_bottom = 49.0
+
+[node name="HeroName" type="Label" parent="VSplitContainer/VBoxContainer"]
+margin_right = 84.0
+margin_bottom = 14.0
+text = "Warrior"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="HSplitContainer" parent="VSplitContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 84.0
+margin_bottom = 49.0
+
+[node name="hpLabel" parent="VSplitContainer/VBoxContainer/VSplitContainer" instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_right = 30.0
+margin_bottom = 31.0
+text = "5 HP
+"
+uppercase = true
+statNick = "HP"
+
+[node name="powerLabel" parent="VSplitContainer/VBoxContainer/VSplitContainer" instance=ExtResource( 2 )]
+margin_left = 42.0
+margin_right = 84.0
+margin_bottom = 31.0
+text = "5 PW
+"
+statNick = "PW"
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer"]
+margin_top = 61.0
+margin_right = 84.0
+margin_bottom = 165.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="ActionHeroPanel" type="GridContainer" parent="VSplitContainer/PanelContainer"]
+margin_right = 84.0
+margin_bottom = 104.0
+columns = 2
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/PanelContainer/ActionHeroPanel"]
+margin_right = 40.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 40, 50 )
+color = Color( 0.505882, 0.854902, 0.0823529, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="VSplitContainer/PanelContainer/ActionHeroPanel"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 40, 50 )
+color = Color( 0.505882, 0.854902, 0.0823529, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="VSplitContainer/PanelContainer/ActionHeroPanel"]
+margin_top = 54.0
+margin_right = 40.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 40, 50 )
+color = Color( 0.505882, 0.854902, 0.0823529, 1 )
+
+[node name="Clickablezone" type="Control" parent="."]
+margin_right = 84.0
+margin_bottom = 165.0
+rect_min_size = Vector2( 84, 65 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]

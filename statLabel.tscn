@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://statLabel.gd" type="Script" id=1]
+
+[node name="statLabel" type="Label"]
+margin_left = 159.0
+margin_right = 159.0
+margin_bottom = 14.0
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
