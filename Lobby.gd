@@ -9,6 +9,7 @@ func _ready():
 	
 	$ServerButton.connect("create_server", self, "_server_creation")
 	$ClientButton.connect("client_connection", self, "_client_connection")
+	$SendChatMessage.connect("send_chat_message", self, "_on_send_message")
 	
 	get_tree().connect("network_peer_connected", self, "_player_connected")	
 	get_tree().connect("connection_failed", self, "_connected_fail")
@@ -39,4 +40,10 @@ func _client_connection():
 	else:
 		$LobbyInfoBox.text += "Error connecting as a client (Error %d)" % status
 	
+func _on_send_message():
+	var message = $ChatInput.text
+	rpc("send_message", message)
+	
 
+remotesync func send_message(message):
+	$ChatDisplay.text += "%s \n" % message
