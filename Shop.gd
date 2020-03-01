@@ -10,7 +10,7 @@ func _ready():
 		print("pb lors de la connexion hero_item_selected_playerboard au shop")
 	if $EquipShopPanel/EquipShop.connect("equip_item_selected_shop",self,"on_equip_item_selected_shop") != OK:
 		print("pb lors de la connexion equip_item_selected_shop au shop")
-		$PlayerBoardPanel/InfoPanel/coinLabel.set_new_coin(playerState.get_coin())
+#	$PlayerBoardPanel/InfoPanel/coinLabel.set_stat(playerState.get_coin())
 
 
 func on_hero_item_selected_shop(hi):
@@ -19,6 +19,7 @@ func on_hero_item_selected_shop(hi):
 	$Log.text=$Log.text + "\nAchat d'un héros"
 
 func on_equip_item_selected_shop(_hi):
+	$PlayerBoardPanel/InfoPanel/coinLabel.set_stat(playerState.get_coin())
 	$Log.text=$Log.text + "\nAchat d'un equipement"
 
 func on_hero_item_selected_playerboard(_hi):

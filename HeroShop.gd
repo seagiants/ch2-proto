@@ -2,7 +2,7 @@ extends HBoxContainer
 
 signal hero_item_selected_shop(hi)
 signal max_hero_picked
-
+const HeroLib = preload("res://lib/HeroLib.gd")
 const max_hero_pick = 1
 var hero_pick = 0
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +10,7 @@ func _ready():
 	var hero_item = preload("res://HeroItem2.tscn")
 	for i in ["Warrior","Rogue","Fishman"]:
 		var hi = hero_item.instance()
-		var template = HeroLib.get_hero_template(i)
+		var template = HeroLib.new().get_hero_template(i)
 		hi.init(template)
 		add_hero_item(hi)
 
@@ -34,6 +34,6 @@ func add_hero_item(hi):
 	hi.connect("hero_selected",self,"on_hero_selected",[hi])
 
 func remove_hero_item(hi):
-	hi.disconnect("gui_input",self,"on_gui_input")
+	hi.disconnect("hero_selected",self,"on_hero_selected")
 	remove_child(hi)
 	

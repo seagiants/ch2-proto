@@ -11,11 +11,15 @@ signal hero_selected(hi)
 func _ready():
 	var click = get_node("Clickablezone")
 	click.connect("gui_input",self,"on_gui_input",[click])
+	click.connect("item_dropped",self,"on_item_dropped")
 
 func init(ht):	
 	self.hp = ht["hp"]
 	self.pw = ht["pw"]
 	self.heroName = ht["name"]
+
+func on_item_dropped(cost):
+	emit_signal("item_equipped",cost)
 
 func on_gui_input(event,hi):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
@@ -23,7 +27,7 @@ func on_gui_input(event,hi):
 		
 func set_hp(nhp):
 	hp=nhp
-	print("setting hp to "+ str(nhp))
+#	print("setting hp to "+ str(nhp))
 	$VSplitContainer/VBoxContainer/VSplitContainer/hpLabel.set_stat(nhp)
 
 func get_hp():
@@ -31,7 +35,7 @@ func get_hp():
 
 func set_pw(npw):
 	pw=npw
-	print("setting pw to "+ str(npw))
+#	print("setting pw to "+ str(npw))
 	$VSplitContainer/VBoxContainer/VSplitContainer/powerLabel.set_stat(npw)
 
 func get_pw():
@@ -39,24 +43,14 @@ func get_pw():
 	
 func set_name(nname):
 	heroName=nname
-	print("setting name to "+ str(nname))
+#	print("setting name to "+ str(nname))
 	$VSplitContainer/VBoxContainer/HeroName.set_text(nname)
 
 func get_name():
 	return heroName
 
 func inShop(_cost):
+#	print("in shop")
 	return false
 
-#Fired dropping a node is offered
-func can_drop_data(_pos, data):
-	return equippable.call_func(data.cost)
-
-#Fired when dropping a node on it
-func drop_data(_pos, data):
-	var shop = self.find_parent("Shop")
-	var equipShop = shop.find_node("EquipShop")
-	var soldContainer = equipShop.get_node(data.parentName)
-	emit_signal("item_equipped",data.cost)
-	soldContainer.free()
 

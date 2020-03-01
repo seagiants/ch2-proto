@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://HeroItem2.gd" type="Script" id=1]
 [ext_resource path="res://statLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ActionHeroPanel.gd" type="Script" id=3]
+[ext_resource path="res://Clickablezone.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.486275, 0.482353, 0.482353, 1 )
@@ -98,5 +99,4 @@ color = Color( 0.505882, 0.854902, 0.0823529, 1 )
 margin_right = 84.0
 margin_bottom = 165.0
 rect_min_size = Vector2( 84, 65 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+script = ExtResource( 4 )
