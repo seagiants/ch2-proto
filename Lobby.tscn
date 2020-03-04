@@ -81,7 +81,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="ChatTitle" type="RichTextLabel" parent="."]
 margin_left = 448.0
 margin_top = 128.0
 margin_right = 544.0
@@ -93,7 +93,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemList" type="ItemList" parent="."]
+[node name="IPSelect" type="ItemList" parent="."]
 margin_left = 448.0
 margin_top = 24.0
 margin_right = 560.0

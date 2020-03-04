@@ -11,8 +11,8 @@ var IPS = {
 
 func _ready():
 	
-	$ItemList.add_item("localhost")
-	$ItemList.add_item("Eric")
+	$IPSelect.add_item("localhost")
+	$IPSelect.add_item("Eric")
 	
 	$LobbyInfoBox.text += "This is the place\n"
 	
@@ -40,14 +40,14 @@ func _server_creation():
 		$LobbyInfoBox.text += "Error creating server (Error %d)\n" % status 
 
 func _client_connection():
-	$LobbyInfoBox.text += "Connection as a client"
+	$LobbyInfoBox.text += "Connection as a client \n"
 	var peer = NetworkedMultiplayerENet.new()
-	var selected_adress_idx = $ItemList.get_selected_items()[0]
-	var ip = IPS[$ItemList.get_item_text(selected_adress_idx)]
+	var selected_adress_idx = $IPSelect.get_selected_items()[0]
+	var ip = IPS[$IPSelect.get_item_text(selected_adress_idx)]
 	$LobbyInfoBox.text += "IP is %s \n" % ip
-	var status = peer.create_client(SERVER_IP, SERVER_PORT)
+	var status = peer.create_client(ip, SERVER_PORT)
 	if status == OK:
-		$LobbyInfoBox.text += "Connection successfull!"
+		$LobbyInfoBox.text += "Connection successfull!\n"
 		get_tree().set_network_peer(peer)
 	else:
 		$LobbyInfoBox.text += "Error connecting as a client (Error %d)" % status
