@@ -4,7 +4,16 @@ var SERVER_IP = "127.0.0.1"
 var SERVER_PORT = 9000
 var MAX_PLAYERS = 2
 
+var IPS = {
+	"localhost": "127.0.0.1",
+	"Eric": "192.168.0.0"
+}
+
 func _ready():
+	
+	$ItemList.add_item("localhost")
+	$ItemList.add_item("Eric")
+	
 	$LobbyInfoBox.text += "This is the place\n"
 	
 	$ServerButton.connect("create_server", self, "_server_creation")
@@ -33,6 +42,9 @@ func _server_creation():
 func _client_connection():
 	$LobbyInfoBox.text += "Connection as a client"
 	var peer = NetworkedMultiplayerENet.new()
+	var selected_adress_idx = $ItemList.get_selected_items()[0]
+	var ip = IPS[$ItemList.get_item_text(selected_adress_idx)]
+	$LobbyInfoBox.text += "IP is %s \n" % ip
 	var status = peer.create_client(SERVER_IP, SERVER_PORT)
 	if status == OK:
 		$LobbyInfoBox.text += "Connection successfull!"
