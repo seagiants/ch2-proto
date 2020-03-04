@@ -6,5 +6,6 @@ func _ready():
 		print("Impossible de se connecter au PlayerBoard")
 	$InfoPanel/coinLabel.set_stat(playerState.get_coin())
 	
-func on_equip_on_hero_item(_ei):
+func on_equip_on_hero_item(ei):
+	playerState.set_coin(playerState.get_coin()-int(ei.cost))
 	$InfoPanel/coinLabel.set_stat(playerState.get_coin())

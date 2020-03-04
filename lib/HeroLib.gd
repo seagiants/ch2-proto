@@ -19,7 +19,7 @@ const Hero_Lib = {
 }
 
 func get_hero_template(ht):
-	print (Hero_Lib[ht])
+#	print (Hero_Lib[ht])
 	return Hero_Lib[ht]
 
 #const EquipItemContainer = preload("res://EquipItemContainer.tscn")
