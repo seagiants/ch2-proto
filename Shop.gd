@@ -19,7 +19,7 @@ func on_hero_item_selected_shop(hi):
 	$Log.text=$Log.text + "\nAchat d'un héros"
 
 func on_equip_item_selected_shop(_hi):
-	$PlayerBoardPanel/InfoPanel/coinLabel.set_stat(playerState.get_coin())
+	$PlayerBoardPanel/InfoPanel/coinLabel.set_stat(GameState.players[0].get_coin())
 	$Log.text=$Log.text + "\nAchat d'un equipement"
 
 func on_hero_item_selected_playerboard(_hi):
@@ -28,3 +28,7 @@ func on_hero_item_selected_playerboard(_hi):
 func on_max_hero_picked():
 	$Log.text=$Log.text + "\nAssez de héros pour l'instant."
 
+
+
+func _on_Simone_pressed():
+	get_tree().change_scene("res://scenes/Quest/Map.tscn")

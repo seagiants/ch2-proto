@@ -118,3 +118,10 @@ rect_min_size = Vector2( 10, 10 )
 margin_top = 132.0
 margin_right = 1022.0
 margin_bottom = 146.0
+
+[node name="Button" type="Button" parent="."]
+margin_top = 150.0
+margin_right = 1022.0
+margin_bottom = 170.0
+text = "En voiture Simone !"
+[connection signal="pressed" from="Button" to="." method="_on_Simone_pressed"]

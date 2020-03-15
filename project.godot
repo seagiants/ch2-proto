@@ -21,7 +21,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-playerState="*res://playerState.gd"
+TilesType="*res://scenes/Quest/tiles/TilesType.gd"
+GameState="*res://GameState.gd"
+AbilityLib="*res://heroes/abilities/AbilityLib.gd"
 
 [rendering]
 
