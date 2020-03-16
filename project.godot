@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 TilesType="*res://scenes/Quest/tiles/TilesType.gd"
 GameState="*res://GameState.gd"
 AbilityLib="*res://heroes/abilities/AbilityLib.gd"
+HeroLib="*res://heroes/HeroLib.gd"
 
 [rendering]
 

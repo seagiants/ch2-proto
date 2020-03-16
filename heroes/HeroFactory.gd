@@ -1,7 +1,7 @@
 extends Object
 
-func get_hero(hero_name,caracs = null):
-	var hero = load("res://heroes/%s.tscn" % hero_name).instance()
+static func get_hero(caracs):
+	var hero = load("res://heroes/Hero.tscn").instance()
 	hero.init(caracs)
 	return hero	
 

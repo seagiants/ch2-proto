@@ -14,7 +14,7 @@ func _ready():
 	var factory = load("res://heroes/HeroFactory.gd").new()
 	for i in range(pool.size()):
 		var caracs = pool[i].duplicate()
-		var hero = factory.get_hero(caracs.type,caracs)
+		var hero = factory.get_hero(caracs)
 		add_hero(hero,i)
 	
 func add_hero(hero,index):

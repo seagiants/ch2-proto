@@ -1,17 +1,20 @@
 extends Node
 
 const Hero_Lib = {
-	"Merchant" : {
-		"type" : "Merchant",
+	"Marchand" : {
+		"type" : "Marchand",
 		"name" : "Bob",
-		"abilities" : ["GREEDY"]
+		"abilities" : ["commerce"]
 	},
-	"Rogue" : {
-		"type" : "Rogue",
+	"Forestier" : {
+		"type" : "Forestier",
 		"name" : "Ted",
-		"abilities" : []
+		"abilities" : ["recolte_bois"]
 	}
 }
+
+func get_pool():
+	return Hero_Lib.keys()
 
 static func get_hero_template(ht):
 #	print (Hero_Lib[ht])

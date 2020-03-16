@@ -43,6 +43,9 @@ func set_power(npower: int):
 	_power = npower
 	emit_signal("loco_stats_changed",0)
 
+func add_power(npower: int):
+	set_power(_power + npower)
+
 func get_coin():
 	return _coin
 

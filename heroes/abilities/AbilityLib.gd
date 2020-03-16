@@ -1,20 +1,15 @@
 extends Node
 
-
-const Hero_Lib = {
-	"Merchant" : {
-		"name" : "Bob",
-		"abilities" : ["GREEDY"]
+const Ability_Description = {
+	"commerce":{
+		"description" : "+1 coin",
+		"icon" : "PLAIN"
 	},
-	"Rogue" : {
-		"name" : "Ted",
-		"hp" : 2,
-		"pw" : 1
+	"recolte_bois":{
+		"description" : "+1 puissance",
+		"icon" : "FOREST"
 	}
 }
-
-func get_ability_template(at):
-	return Hero_Lib[at]
 
 func filter_abilities(tileType, abilities):
 	var nabilities = []
@@ -28,10 +23,21 @@ func resolve_ability(ability,state):
 	var f = funcref(self,"%s_resolver" % ability)
 	return f.call_func(state)
 	
-func GREEDY_cond(tile_type):
+func get_ability_description(ability_name):
+	return Ability_Description[ability_name]
+
+func commerce_cond(tile_type):
 	return tile_type == "PLAIN"
 	
-func GREEDY_resolver(state):
-	print("Resolve Greedy")
+func commerce_resolver(state):
+	print("Resolve commerce")
 	state.add_coin(1)
+	return state
+
+func recolte_bois_cond(tile_type):
+	return tile_type == "FOREST"
+	
+func recolte_bois_resolver(state):
+	print("Resolve recolte_bois")
+	state.add_power(1)
 	return state

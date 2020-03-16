@@ -1,151 +1,115 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://heroes/Merchant.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/newShop/HeroShop/HeroShop.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerBoard/PlayerBoard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/newShop/new_Shop2.gd" type="Script" id=3]
-[ext_resource path="res://scenes/newShop/HeroContainer.gd" type="Script" id=4]
-[ext_resource path="res://old/Shop/StatLabel2.gd" type="Script" id=5]
-[ext_resource path="res://statLabel.tscn" type="PackedScene" id=6]
 
 [node name="Shop" type="VBoxContainer"]
-margin_left = 3.0
+margin_left = 2.0
 margin_top = 1.0
-margin_right = 1025.0
+margin_right = 1024.0
 margin_bottom = 501.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HeroShopPanel" type="VSplitContainer" parent="."]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_right = 1022.0
-margin_bottom = 68.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+split_offset = 6
+
+[node name="HeroShopPanel" type="VSplitContainer" parent="HSplitContainer"]
+margin_right = 512.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HeroShopPanel"]
+[node name="Label" type="Label" parent="HSplitContainer/HeroShopPanel"]
+margin_right = 512.0
+margin_bottom = 31.0
+text = "Welcome to the Hero shop! [V3]
+Drag hero to an empty space on your loco"
+
+[node name="HeroShop" parent="HSplitContainer/HeroShopPanel" instance=ExtResource( 1 )]
+margin_top = 43.0
+margin_right = 512.0
+margin_bottom = 280.0
+
+[node name="EquipShopPanel" type="VSplitContainer" parent="HSplitContainer"]
+margin_left = 522.0
 margin_right = 1022.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HSplitContainer/EquipShopPanel"]
+margin_right = 500.0
 margin_bottom = 14.0
-text = "Welcome to the Hero shop! [V2]"
+text = "Drag item to an empty room on your loco."
 
-[node name="HeroShop" type="HBoxContainer" parent="HeroShopPanel"]
+[node name="EquipShop" type="HBoxContainer" parent="HSplitContainer/EquipShopPanel"]
 margin_top = 26.0
-margin_right = 1022.0
-margin_bottom = 68.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelContainer" type="PanelContainer" parent="HeroShopPanel/HeroShop"]
-margin_right = 28.0
-margin_bottom = 42.0
-script = ExtResource( 4 )
-
-[node name="Merchant" parent="HeroShopPanel/HeroShop/PanelContainer" instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 21.0
-margin_bottom = 35.0
-mouse_filter = 1
-
-[node name="PanelContainer2" type="PanelContainer" parent="HeroShopPanel/HeroShop"]
-margin_left = 32.0
-margin_right = 60.0
-margin_bottom = 42.0
-script = ExtResource( 4 )
-
-[node name="Merchant2" parent="HeroShopPanel/HeroShop/PanelContainer2" instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 21.0
-margin_bottom = 35.0
-mouse_filter = 1
-
-[node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 72.0
-margin_right = 1022.0
-margin_bottom = 82.0
-rect_min_size = Vector2( 10, 10 )
-
-[node name="EquipShopPanel" type="VSplitContainer" parent="."]
-margin_top = 86.0
-margin_right = 1022.0
-margin_bottom = 112.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="EquipShopPanel"]
-margin_right = 1022.0
-margin_bottom = 14.0
-text = "Drag item to the hero you want to equip."
-
-[node name="EquipShop" type="HBoxContainer" parent="EquipShopPanel"]
-margin_top = 26.0
-margin_right = 1022.0
-margin_bottom = 26.0
+margin_right = 500.0
+margin_bottom = 280.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator3" type="HSeparator" parent="."]
-margin_top = 116.0
+margin_top = 284.0
 margin_right = 1022.0
-margin_bottom = 126.0
+margin_bottom = 294.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="PlayerBoardPanel" type="VSplitContainer" parent="."]
-margin_top = 130.0
+margin_top = 298.0
 margin_right = 1022.0
-margin_bottom = 273.0
+margin_bottom = 430.0
 
-[node name="InfoPanel" type="HBoxContainer" parent="PlayerBoardPanel"]
+[node name="Label" type="Label" parent="PlayerBoardPanel"]
 margin_right = 1022.0
-margin_bottom = 14.0
-
-[node name="Label" type="Label" parent="PlayerBoardPanel/InfoPanel"]
-margin_right = 147.0
-margin_bottom = 14.0
-text = "This the playerBoard !!!"
+margin_bottom = 31.0
+text = "This the playerBoard !!!
+Left rooms are for Heros, rights for items."
 align = 1
 valign = 1
 
-[node name="VSeparator" type="VSeparator" parent="PlayerBoardPanel/InfoPanel"]
-margin_left = 151.0
-margin_right = 155.0
-margin_bottom = 14.0
-
-[node name="coinLabel" parent="PlayerBoardPanel/InfoPanel" instance=ExtResource( 6 )]
-script = ExtResource( 5 )
-statNick = ""
-
 [node name="PlayerBoard" parent="PlayerBoardPanel" instance=ExtResource( 2 )]
 margin_left = 0.0
-margin_top = 26.0
+margin_top = 43.0
 margin_right = 1022.0
-margin_bottom = 143.0
+margin_bottom = 132.0
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 277.0
+margin_top = 434.0
 margin_right = 1022.0
-margin_bottom = 287.0
+margin_bottom = 444.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="Log" type="Label" parent="."]
-margin_top = 291.0
+margin_top = 448.0
 margin_right = 1022.0
-margin_bottom = 305.0
+margin_bottom = 462.0
 
 [node name="HSeparator4" type="HSeparator" parent="."]
-margin_top = 309.0
+margin_top = 466.0
 margin_right = 1022.0
-margin_bottom = 319.0
+margin_bottom = 476.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="Button" type="Button" parent="."]
-margin_top = 323.0
+margin_top = 480.0
 margin_right = 1022.0
-margin_bottom = 343.0
+margin_bottom = 500.0
 text = "En voiture Simone !"
 [connection signal="pressed" from="Button" to="." method="_on_Simone_pressed"]

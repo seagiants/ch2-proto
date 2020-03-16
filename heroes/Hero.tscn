@@ -3,7 +3,8 @@
 [ext_resource path="res://heroes/hero.gd" type="Script" id=1]
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 96.0
+margin_left = -1.0
+margin_right = 95.0
 margin_bottom = 123.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -20,7 +21,9 @@ margin_bottom = 116.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 82.0
-margin_bottom = 14.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
+text = "New Hero
+John"
 align = 1
 valign = 1
