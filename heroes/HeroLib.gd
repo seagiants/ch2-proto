@@ -2,13 +2,14 @@ extends Node
 
 const Hero_Lib = {
 	"Merchant" : {
+		"type" : "Merchant",
 		"name" : "Bob",
 		"abilities" : ["GREEDY"]
 	},
 	"Rogue" : {
+		"type" : "Rogue",
 		"name" : "Ted",
-		"hp" : 2,
-		"pw" : 1
+		"abilities" : []
 	}
 }
 
