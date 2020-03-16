@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/Shop/HeroShop2.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Shop/HeroShopPanel2.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Shop/Shop2.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Shop/EquipShop2.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Shop/StatLabel2.gd" type="Script" id=5]
+[ext_resource path="res://old/HeroShop.gd" type="Script" id=1]
+[ext_resource path="res://old/PlayerBoard.gd" type="Script" id=2]
+[ext_resource path="res://old/Shop.gd" type="Script" id=3]
+[ext_resource path="res://old/EquipShop.gd" type="Script" id=4]
+[ext_resource path="res://old/PlayerBoardPanel.gd" type="Script" id=5]
 [ext_resource path="res://statLabel.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Shop/PlayerBoardPanel2.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Shop/PlayerBoard2.gd" type="Script" id=8]
+[ext_resource path="res://old/HeroShopPanel.gd" type="Script" id=7]
+
 
 [node name="Shop" type="VBoxContainer"]
 margin_left = 3.0
@@ -22,7 +22,7 @@ __meta__ = {
 [node name="HeroShopPanel" type="VSplitContainer" parent="."]
 margin_right = 1022.0
 margin_bottom = 26.0
-script = ExtResource( 2 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -30,7 +30,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="HeroShopPanel"]
 margin_right = 1022.0
 margin_bottom = 14.0
-text = "Welcome to the Hero shop! [V2]"
+text = "This the hero shop !"
 
 [node name="HeroShop" type="HBoxContainer" parent="HeroShopPanel"]
 margin_top = 26.0
@@ -79,7 +79,7 @@ rect_min_size = Vector2( 10, 10 )
 margin_top = 88.0
 margin_right = 1022.0
 margin_bottom = 114.0
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 
 [node name="InfoPanel" type="HBoxContainer" parent="PlayerBoardPanel"]
 margin_right = 1022.0
@@ -98,13 +98,13 @@ margin_right = 155.0
 margin_bottom = 14.0
 
 [node name="coinLabel" parent="PlayerBoardPanel/InfoPanel" instance=ExtResource( 6 )]
-script = ExtResource( 5 )
+statNick = "GP"
 
 [node name="PlayerBoard" type="HBoxContainer" parent="PlayerBoardPanel"]
 margin_top = 26.0
 margin_right = 1022.0
 margin_bottom = 26.0
-script = ExtResource( 8 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -119,3 +119,10 @@ rect_min_size = Vector2( 10, 10 )
 margin_top = 132.0
 margin_right = 1022.0
 margin_bottom = 146.0
+
+[node name="Button" type="Button" parent="."]
+margin_top = 150.0
+margin_right = 1022.0
+margin_bottom = 170.0
+text = "En voiture Simone !"
+[connection signal="pressed" from="Button" to="." method="_on_Simone_pressed"]

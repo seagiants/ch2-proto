@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://HeroShop.gd" type="Script" id=1]
-[ext_resource path="res://PlayerBoard.gd" type="Script" id=2]
-[ext_resource path="res://Shop.gd" type="Script" id=3]
-[ext_resource path="res://EquipShop.gd" type="Script" id=4]
-[ext_resource path="res://PlayerBoardPanel.gd" type="Script" id=5]
+[ext_resource path="res://old/Shop/HeroShop2.gd" type="Script" id=1]
+[ext_resource path="res://old/Shop/HeroShopPanel2.gd" type="Script" id=2]
+[ext_resource path="res://old/Shop/Shop2.gd" type="Script" id=3]
+[ext_resource path="res://old/Shop/EquipShop2.gd" type="Script" id=4]
+[ext_resource path="res://old/Shop/StatLabel2.gd" type="Script" id=5]
 [ext_resource path="res://statLabel.tscn" type="PackedScene" id=6]
-[ext_resource path="res://HeroShopPanel.gd" type="Script" id=7]
+[ext_resource path="res://old/Shop/PlayerBoardPanel2.gd" type="Script" id=7]
+[ext_resource path="res://old/Shop/PlayerBoard2.gd" type="Script" id=8]
+
 
 [node name="Shop" type="VBoxContainer"]
 margin_left = 3.0
@@ -21,7 +23,7 @@ __meta__ = {
 [node name="HeroShopPanel" type="VSplitContainer" parent="."]
 margin_right = 1022.0
 margin_bottom = 26.0
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,7 +31,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="HeroShopPanel"]
 margin_right = 1022.0
 margin_bottom = 14.0
-text = "This the hero shop !"
+text = "Welcome to the Hero shop! [V2]"
 
 [node name="HeroShop" type="HBoxContainer" parent="HeroShopPanel"]
 margin_top = 26.0
@@ -78,7 +80,7 @@ rect_min_size = Vector2( 10, 10 )
 margin_top = 88.0
 margin_right = 1022.0
 margin_bottom = 114.0
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="InfoPanel" type="HBoxContainer" parent="PlayerBoardPanel"]
 margin_right = 1022.0
@@ -97,13 +99,13 @@ margin_right = 155.0
 margin_bottom = 14.0
 
 [node name="coinLabel" parent="PlayerBoardPanel/InfoPanel" instance=ExtResource( 6 )]
-statNick = "GP"
+script = ExtResource( 5 )
 
 [node name="PlayerBoard" type="HBoxContainer" parent="PlayerBoardPanel"]
 margin_top = 26.0
 margin_right = 1022.0
 margin_bottom = 26.0
-script = ExtResource( 2 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -118,10 +120,3 @@ rect_min_size = Vector2( 10, 10 )
 margin_top = 132.0
 margin_right = 1022.0
 margin_bottom = 146.0
-
-[node name="Button" type="Button" parent="."]
-margin_top = 150.0
-margin_right = 1022.0
-margin_bottom = 170.0
-text = "En voiture Simone !"
-[connection signal="pressed" from="Button" to="." method="_on_Simone_pressed"]

@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/PlayerBoard/PlayerBoard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/newShop/new_Shop2.gd" type="Script" id=3]
 [ext_resource path="res://scenes/newShop/HeroContainer.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Shop/StatLabel2.gd" type="Script" id=5]
+[ext_resource path="res://old/Shop/StatLabel2.gd" type="Script" id=5]
 [ext_resource path="res://statLabel.tscn" type="PackedScene" id=6]
 
 [node name="Shop" type="VBoxContainer"]
@@ -118,6 +118,7 @@ margin_bottom = 14.0
 
 [node name="coinLabel" parent="PlayerBoardPanel/InfoPanel" instance=ExtResource( 6 )]
 script = ExtResource( 5 )
+statNick = ""
 
 [node name="PlayerBoard" parent="PlayerBoardPanel" instance=ExtResource( 2 )]
 margin_left = 0.0
