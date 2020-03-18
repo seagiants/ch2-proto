@@ -7,12 +7,9 @@ func _ready():
 	loco = preload("res://scenes/Quest/tiles/tilesSprite/LocoTiles.tscn").instance()
 	var length = 4
 	var tilesPool = preload("res://scenes/Quest/tiles/tileFactory.gd").get_tiles(length)
-	print(tilesPool)
 	for i in range(length):
-			print(i)
 			var j = 1
 			var cell = tile.new(tilesPool[i],Vector2(i,j))
-			print(cell)
 			add_child(cell)
 			cell.set_name(str(i)+"x"+str(j))
 			cell.connect("tiles_clicked",self,"on_tiles_clicked")
@@ -43,7 +40,7 @@ func advance_loco():
 	loco = start.content
 	var pos_end = start.index + Vector2(1,0)
 	if not(has_node(pos_to_name(pos_end))):
-		var _changed = get_tree().change_scene("res://scenes/newShop/new_Shop2.tscn")
+		var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
 		return
 	else:
 		var end = get_node(pos_to_name(pos_end))

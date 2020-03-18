@@ -8,7 +8,6 @@
 [ext_resource path="res://statLabel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://old/HeroShopPanel.gd" type="Script" id=7]
 
-
 [node name="Shop" type="VBoxContainer"]
 margin_left = 3.0
 margin_top = 1.0
@@ -21,7 +20,9 @@ __meta__ = {
 
 [node name="HeroShopPanel" type="VSplitContainer" parent="."]
 margin_right = 1022.0
-margin_bottom = 26.0
+margin_bottom = 356.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -35,22 +36,24 @@ text = "This the hero shop !"
 [node name="HeroShop" type="HBoxContainer" parent="HeroShopPanel"]
 margin_top = 26.0
 margin_right = 1022.0
-margin_bottom = 26.0
+margin_bottom = 356.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 30.0
+margin_top = 360.0
 margin_right = 1022.0
-margin_bottom = 40.0
+margin_bottom = 370.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="EquipShopPanel" type="VSplitContainer" parent="."]
-margin_top = 44.0
+margin_top = 374.0
 margin_right = 1022.0
-margin_bottom = 70.0
+margin_bottom = 400.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,15 +73,15 @@ __meta__ = {
 }
 
 [node name="HSeparator3" type="HSeparator" parent="."]
-margin_top = 74.0
+margin_top = 404.0
 margin_right = 1022.0
-margin_bottom = 84.0
+margin_bottom = 414.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="PlayerBoardPanel" type="VSplitContainer" parent="."]
-margin_top = 88.0
+margin_top = 418.0
 margin_right = 1022.0
-margin_bottom = 114.0
+margin_bottom = 444.0
 script = ExtResource( 5 )
 
 [node name="InfoPanel" type="HBoxContainer" parent="PlayerBoardPanel"]
@@ -110,19 +113,19 @@ __meta__ = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 118.0
+margin_top = 448.0
 margin_right = 1022.0
-margin_bottom = 128.0
+margin_bottom = 458.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="Log" type="Label" parent="."]
-margin_top = 132.0
+margin_top = 462.0
 margin_right = 1022.0
-margin_bottom = 146.0
+margin_bottom = 476.0
 
 [node name="Button" type="Button" parent="."]
-margin_top = 150.0
+margin_top = 480.0
 margin_right = 1022.0
-margin_bottom = 170.0
+margin_bottom = 500.0
 text = "En voiture Simone !"
 [connection signal="pressed" from="Button" to="." method="_on_Simone_pressed"]

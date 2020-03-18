@@ -13,7 +13,6 @@ func on_loco_stats_changed(player_index):
 	for i in range(stat_box.get_child_count()):
 		stat_box.get_child(i).queue_free()
 	var nstats = GameState.players[player_index].get_loco_stats() 
-	print(nstats)
 	for stat in nstats.keys():
 		var label = StatLabel.instance()
 		label.init(stat,nstats[stat])

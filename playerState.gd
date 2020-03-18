@@ -2,8 +2,8 @@ extends Node
 
 var _coin = 15 setget set_coin,get_coin
 var _power = 1 setget set_power,get_power
-#var _loco setget set_loco,get_loco
 var _heroPool = [] setget set_heroPool,get_heroPool
+var _itemPool = [] setget set_itemPool,get_itemPool
 
 signal loco_stats_changed(player_index)
 
@@ -16,6 +16,15 @@ func get_heroPool():
 func add_hero(hero):
 	_heroPool.append(hero)
 
+func set_itemPool(ipool):
+	_itemPool = ipool
+
+func get_itemPool():
+	return _itemPool
+
+func add_item(item):
+	_itemPool.append(item)
+
 func get_abilities(tileType = null):
 	var abilityLib = preload("res://heroes/abilities/AbilityLib.gd").new()
 	var abilities = []
@@ -24,12 +33,6 @@ func get_abilities(tileType = null):
 			abilities.append(ability)
 	return abilities
 			
-#func set_loco(loco):
-#	_loco = loco
-#
-#func get_loco():
-#	return _loco
-
 func get_loco_stats():
 	return {
 		"coin" : get_coin(),
@@ -55,4 +58,3 @@ func set_coin(ncoin: int):
 	
 func add_coin(ncoin: int):
 	set_coin(_coin + ncoin)
-#	print(_coin)
