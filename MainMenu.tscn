@@ -7,9 +7,9 @@
 position = Vector2( 0, 1 )
 
 [node name="StartButton" type="Button" parent="."]
-margin_left = 414.199
+margin_left = 415.199
 margin_top = 243.881
-margin_right = 636.199
+margin_right = 637.199
 margin_bottom = 382.881
 text = "START"
 script = ExtResource( 1 )

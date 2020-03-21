@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/PlayerBoard/PlayerBoard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Quest/Map/Map.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+
+[node name="PanelContainer" parent="." instance=ExtResource( 1 )]
+margin_left = 1.26413
+margin_top = 439.275
+margin_right = 595.264
+margin_bottom = 603.275

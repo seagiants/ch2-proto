@@ -1,17 +1,40 @@
 extends Node
 
+var _index
 var _coin = 15 setget set_coin,get_coin
 var _power = 1 setget set_power,get_power
+var _hp = 5 setget set_hp,get_hp
 var _heroPool = [] setget set_heroPool,get_heroPool
 var _itemPool = [] setget set_itemPool,get_itemPool
+var _loco_position setget set_loco_position, get_loco_position
+var _path = [0,0,0] setget set_path, get_path
 
 signal loco_stats_changed(player_index)
+
+func _init(index = 0, pos = Vector2(0,1)):
+	_index = index
+	_loco_position = pos
+
+func get_path():
+	return _path
+
+func set_path(npath : Array):
+	_path = npath
 
 func set_heroPool(hpool):
 	_heroPool = hpool
 
 func get_heroPool():
 	return _heroPool
+
+func reinit_loco_position():
+	set_loco_position(Vector2(0,get_loco_position()[1]))
+
+func set_loco_position(pos):
+	_loco_position = pos
+
+func get_loco_position():
+	return _loco_position
 
 func add_hero(hero):
 	_heroPool.append(hero)
@@ -36,7 +59,8 @@ func get_abilities(tileType = null):
 func get_loco_stats():
 	return {
 		"coin" : get_coin(),
-		"puissance" : get_power()
+		"puissance" : get_power(),
+		"hp": get_hp()
 	}
 
 func get_power():
@@ -44,7 +68,14 @@ func get_power():
 
 func set_power(npower: int):
 	_power = npower
-	emit_signal("loco_stats_changed",0)
+	emit_signal("loco_stats_changed",_index)
+	
+func get_hp():
+	return _hp
+
+func set_hp(nhp: int):
+	_hp = nhp
+	emit_signal("loco_stats_changed",_index)
 
 func add_power(npower: int):
 	set_power(_power + npower)
@@ -54,7 +85,7 @@ func get_coin():
 
 func set_coin(ncoin: int):
 	_coin = ncoin
-	emit_signal("loco_stats_changed",0)
+	emit_signal("loco_stats_changed",_index)
 	
 func add_coin(ncoin: int):
 	set_coin(_coin + ncoin)
