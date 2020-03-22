@@ -14,7 +14,7 @@ var _locos_exited = 0 setget set_locos_exited, get_locos_exited
 func _init():
 	var player
 	generate_map(64,5)
-	print("Initmpap : %s" % _map.size())
+#	print("Initmpap : %s" % _map.size())
 	for i in [0,1]:
 		player = PlayerState.new(i,Vector2(0,1+i*separation))
 		players.append(player)
@@ -35,15 +35,21 @@ func get_locos_exited():
 	return _locos_exited
 
 #From turn index to +8 on x, +2/-2 on y
-func get_current_map():
+func get_current_map(is_preview =false):
 	var current_start = get_turn_step() * get_turn()
 	var current_path = get_map().slice(current_start,current_start+get_turn_step()-1)
-	var next_path = get_map().slice(current_start+get_turn_step(),current_start+2*get_turn_step()-1)
-	var stations = []
-	for i in current_path[0].size():
-		stations.append({"type":"STATION"})
-#		print(current_path + stations + next_path)
-	return current_path + [stations] + next_path
+	if is_preview:
+		var preview = []
+		for i in current_path:
+			preview.append(i.slice(0,2))
+		return preview
+	else :
+		var next_path = get_map().slice(current_start+get_turn_step(),current_start+2*get_turn_step()-1)
+		var stations = []
+		for i in current_path[0].size():
+			stations.append({"type":"STATION"})
+	#		print(current_path + stations + next_path)
+		return current_path + [stations] + next_path
 
 func advance_turn():
 	set_turn(get_turn()+1)
@@ -94,16 +100,34 @@ func draw_new_heroes(nb = 3):
 		draws.append(draw)	
 	return draws
 
-func draw_new_paths(length = 4, nb = 3):
+# A path is just an array of y-move (-1 or 0 or 1) limited by -1/+1 from the stating pos
+func draw_new_paths(length = 3, nb = 3):
+	var player_index = 0
 	var paths = []
 	randomize()
 	var moves = [-1,0,1]
+	var amplitude
+	var t = GameState.players[0].get_loco_position()[1]
+#	print(t)
 	for _n in range(nb):
+		amplitude = t - player_index -1
 		var path = []
 		paths.append(path)
+		var avalaible_moves
+#		print("move :")
 		for _i in range(length):
-			moves.shuffle()
-			path.append(moves[0])
+			if amplitude == 1:
+				avalaible_moves = moves.slice(0,1)
+			elif amplitude == -1:
+				avalaible_moves = moves.slice(1,2)
+			else:
+				avalaible_moves = moves.duplicate()
+			avalaible_moves.shuffle()
+			var picked_move = avalaible_moves[0]
+			amplitude += picked_move
+			path.append(picked_move)
+#			print(str(avalaible_moves)+"->"+str(picked_move)+ ":"+str(amplitude))
+	return paths
 
 func on_loco_exited(_player_index):
 	add_loco_exited()

@@ -11,7 +11,7 @@ var content = null
 var hei
 var wid
 var abPosition
-signal tiles_clicked(tile)
+signal tile_clicked(tile)
 
 func _init(ncell, pos = Vector2(0,0), h = 80, w = 80):
 	hei = h
@@ -30,6 +30,7 @@ func _init(ncell, pos = Vector2(0,0), h = 80, w = 80):
 	abPosition = Vector2(pos.x * h, pos.y * w)
 	tile.set_size(Vector2(h,w))
 	tile.set_position(abPosition)
+	tile.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 #	randomize()
 #	colors.shuffle()
 	
@@ -53,4 +54,4 @@ func add_rail():
 
 func on_click(event):	
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		emit_signal("tiles_clicked",self)
+		emit_signal("tile_clicked",self)

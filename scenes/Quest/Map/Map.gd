@@ -1,15 +1,23 @@
-extends Node2D
+extends Control
 const Tile = preload("res://scenes/Quest/tiles/tile.gd")
 const Loco = preload("res://scenes/Quest/tiles/tilesSprite/LocoTiles.tscn")
 
 signal loco_exited(player_index)
+signal map_clicked(tile_index)
 
-func _ready():	
+#var preview = false
+var index = 0
+
+func init():	
 #	var length = 4
 	init_map(GameState.get_current_map())
 	for i in [0,1]:
 		init_loco(i)
 		init_rails(i)
+
+func preview():
+	var npreview = GameState.get_current_map(true) 
+	init_map(npreview)
 
 func init_loco(player_index = 0):
 	var loco = Loco.instance()
@@ -20,7 +28,7 @@ func init_loco(player_index = 0):
 	get_node(pos_to_name(pos)).add_content(loco)
 
 func init_map(map : Array):
-	self.connect("loco_exited",GameState,"on_loco_exited")
+	var _connect = self.connect("loco_exited",GameState,"on_loco_exited")
 #	print("Mapsize : %s" % map.size())	
 	for i in map.size():
 		for j in map[i].size():
@@ -28,11 +36,12 @@ func init_map(map : Array):
 			var cell = Tile.new(map[i][j],pos)
 			add_child(cell)
 			cell.set_name(pos_to_name(pos))
-			cell.connect("tiles_clicked",self,"on_tiles_clicked")
+			cell.connect("tile_clicked",self,"on_tile_clicked")
 	
 
-func init_rails(player_index):
-	var path = GameState.players[player_index].get_path()
+func init_rails(player_index, path =null):
+	if path == null :
+		path = GameState.players[player_index].get_path()
 	var cells = []
 	var next = GameState.players[player_index].get_loco_position() 
 	cells.append(next)
@@ -40,23 +49,18 @@ func init_rails(player_index):
 		next = next + Vector2(1,move)
 		cells.append(next)
 	for cell in cells:
+#		pass
 		get_node(pos_to_name(cell)).add_rail()
 		
 func pos_to_name(pos: Vector2):
 	var text = str(pos[0])+"x"+str(pos[1]) 
 	return text
 
-func on_tiles_clicked(_ctile):	
-	for i in [0,1]:
-		var start = get_loco_tile(i)
-		var player = GameState.players[i]
-		var cell_type = start.type
-		for ability in player.get_abilities(cell_type):
-			AbilityLib.resolve_ability(ability,player)
-		advance_loco(i)
+func on_tile_clicked(_ctile):	
+	emit_signal("map_clicked",index)
 
-func get_loco_tile(index):
-	var start = GameState.players[index].get_loco_position()
+func get_loco_tile(player_index):
+	var start = GameState.players[player_index].get_loco_position()
 	var out = get_node(pos_to_name(start)) 
 	return out
 
@@ -69,7 +73,11 @@ func advance_loco(i):
 		return
 	var loco = start.content
 #	print("Loco of player%s" % loco.player_index)
-	var pos_end = start.index + Vector2(1,0)
+	var next_move = GameState.players[i].get_next_move()
+	if next_move == null :
+		next_move = 0
+#		print("Arrivé à la station")
+	var pos_end = start.index + Vector2(1,next_move)
 	start.remove_child(loco)
 	start.remove_from_group("Loco")
 	start.content = null

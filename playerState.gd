@@ -8,12 +8,24 @@ var _heroPool = [] setget set_heroPool,get_heroPool
 var _itemPool = [] setget set_itemPool,get_itemPool
 var _loco_position setget set_loco_position, get_loco_position
 var _path = [0,0,0] setget set_path, get_path
+#var _move_index = 0 setget set_move_index,get_move_index
 
 signal loco_stats_changed(player_index)
 
 func _init(index = 0, pos = Vector2(0,1)):
 	_index = index
 	_loco_position = pos
+
+func get_next_move():
+	return _path.pop_front()
+
+#
+#func get_move_index():
+#	return _move_index
+#
+#func set_move_index(nindex : int):
+#	_move_index = nmove_index
+
 
 func get_path():
 	return _path
