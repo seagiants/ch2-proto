@@ -4,6 +4,9 @@
 [ext_resource path="res://scenes/PlayerBoard/LocoStats/LocoStats.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
 bg_color = Color( 0, 0.695313, 1, 1 )
 border_width_left = 2
 border_width_top = 4
@@ -25,15 +28,15 @@ __meta__ = {
 }
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
-margin_left = 2.0
-margin_top = 4.0
-margin_right = 150.0
-margin_bottom = 119.0
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 153.0
+margin_bottom = 118.0
 
 [node name="LocoStats" type="VBoxContainer" parent="HSplitContainer"]
-margin_top = 57.0
+margin_top = 56.0
 margin_right = 64.0
-margin_bottom = 57.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 64, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -43,7 +46,7 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="HSplitContainer"]
 margin_left = 76.0
-margin_right = 148.0
-margin_bottom = 115.0
+margin_right = 143.0
+margin_bottom = 113.0
 texture = ExtResource( 1 )
 stretch_mode = 6

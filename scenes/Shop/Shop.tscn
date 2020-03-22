@@ -106,13 +106,13 @@ rect_min_size = Vector2( 10, 10 )
 [node name="PlayerBoardPanel" type="VSplitContainer" parent="."]
 margin_top = 298.0
 margin_right = 1022.0
-margin_bottom = 430.0
+margin_bottom = 432.0
 
 [node name="Label" type="Label" parent="PlayerBoardPanel"]
 margin_right = 1022.0
 margin_bottom = 31.0
 text = "This the playerBoard !!!
-Left rooms are for Heros, rights for items."
+Left rooms are for Heroes, right for items."
 align = 1
 valign = 1
 
@@ -120,28 +120,28 @@ valign = 1
 margin_left = 0.0
 margin_top = 43.0
 margin_right = 1022.0
-margin_bottom = 132.0
+margin_bottom = 134.0
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 434.0
+margin_top = 436.0
 margin_right = 1022.0
-margin_bottom = 444.0
+margin_bottom = 446.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="Log" type="Label" parent="."]
-margin_top = 448.0
+margin_top = 450.0
 margin_right = 1022.0
-margin_bottom = 462.0
+margin_bottom = 464.0
 
 [node name="HSeparator4" type="HSeparator" parent="."]
-margin_top = 466.0
+margin_top = 468.0
 margin_right = 1022.0
-margin_bottom = 476.0
+margin_bottom = 478.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="Button" type="Button" parent="."]
-margin_top = 480.0
+margin_top = 482.0
 margin_right = 1022.0
-margin_bottom = 500.0
+margin_bottom = 502.0
 text = "En voiture Simone !"
 [connection signal="pressed" from="Button" to="." method="_on_Simone_pressed"]
