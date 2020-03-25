@@ -1,0 +1,20 @@
+{
+	"Marchand" : {
+		"class": "Hero",
+		"type" : "Marchand",
+		"name" : "Bob",
+		"abilities" : ["commerce"]
+	},
+	"Forestier" : {
+		"class": "Hero",
+		"type" : "Forestier",
+		"name" : "Ted",
+        "abilities" : ["recolte_bois"]
+    },
+    "Banquier": {
+        "class": "Hero",
+		"type" : "Forestier",
+		"name" : "Ted",
+        "abilities" : ["banque"]
+    }
+}
