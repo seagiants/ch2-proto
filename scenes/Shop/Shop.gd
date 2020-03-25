@@ -1,6 +1,7 @@
 extends VBoxContainer
 
-var _dumb_counter = 0
+var _dumb_counter: int = 0
+
 func _on_Simone_pressed():
 	var selected_path = $VSplitContainer/PathShop.get_path_selected()
 	if selected_path != null :

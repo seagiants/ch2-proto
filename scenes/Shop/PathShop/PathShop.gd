@@ -19,7 +19,7 @@ func _ready():
 		index  += 1
 
 #D'abord prendre une miniature de la map et ajouter les rails dessus
-func add_path(path : Array, index = 0):
+func add_path(path: Array, index = 0):
 #	var path = PathFactory.get_item(paths)
 	var new_map = Map.instance()
 	new_map.preview()
