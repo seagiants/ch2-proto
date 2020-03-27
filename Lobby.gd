@@ -8,7 +8,8 @@ var MAX_PLAYERS = 1
 
 var IPS = {
 	"localhost": "127.0.0.1",
-	"Eric": "192.168.0.0"
+	"Eric": "192.168.0.0",
+	"Romain": "86.206.53.15"
 }
 
 signal game_created()
@@ -16,8 +17,9 @@ signal player_joined_game(player_id)
 
 func _ready():
 	
-	$IPSelect.add_item("localhost")
-	$IPSelect.add_item("Eric")
+	#$IPSelect.add_item("localhost")
+	for item in IPS.keys():
+		$IPSelect.add_item(item)
 	
 	$LobbyInfoBox.text += "This is the place\n"
 	var _connect
@@ -44,6 +46,7 @@ func _server_creation():
 	if status == OK:
 		get_tree().set_network_peer(peer)
 		$LobbyInfoBox.text += "Server listening to %d\n" % SERVER_PORT
+		$ClientButton.hide()
 		$StartGame.show()
 		emit_signal("game_created")
 #		get_tree().get_root().add_child(Server.new())
