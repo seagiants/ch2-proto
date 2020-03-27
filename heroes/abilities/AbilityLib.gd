@@ -56,5 +56,5 @@ func banque_cond(tile_type):
 func banque_resolver(state):
 	print("Resolving bank")
 	state.add_power(-1)
-	state.add_coin(1)
+	state.add_coin(2)
 	return(state)

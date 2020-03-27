@@ -38,7 +38,7 @@ func _on_player_joined(player_id):
 		GameState.add_player(str(player_id))
 
 remotesync func go_to_quest(player_states):	
-	print("go_to_quest")
+#	print("go_to_quest")
 	if not(get_tree().is_network_server()):
 		print("not server")
 		print(player_states)
@@ -47,7 +47,7 @@ remotesync func go_to_quest(player_states):
 	var _changed = get_tree().change_scene("res://scenes/Quest/Quest.tscn")
 
 remotesync func go_to_shop(player_states, map = null):	
-	print("go_to_shop")
+#	print("go_to_shop")
 	if not(get_tree().is_network_server()):
 		if map != null :
 			GameState.set_map(map)

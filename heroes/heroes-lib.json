@@ -13,7 +13,7 @@
     },
     "Banquier": {
         "class": "Hero",
-		"type" : "Forestier",
+		"type" : "Banquier",
 		"name" : "Ted",
         "abilities" : ["banque"]
     }

@@ -42,22 +42,22 @@ func get_next_move():
 	return _path.pop_front()
 
 func get_avalaible_moves(pos = null):	
-	print("Avalaible moves :")
+#	print("Avalaible moves :")
 	var starting_y = 1+2*get_index()	
 	var y_pos
 	if pos == null:
 		y_pos = get_loco_position()[1]
 	else:
 		y_pos = pos[1]
-	print("        y-pos:"+str(y_pos))
+#	print("        y-pos:"+str(y_pos))
 	if y_pos ==	starting_y:
-			print("        0")
+#			print("        0")
 			return [-1,0,1]
 	if y_pos == starting_y+1:
-			print("        1")
+#			print("        1")
 			return [-1,0]
 	if y_pos == starting_y-1:
-			print("        -1")
+#			print("        -1")
 			return [1,0]
 		
 #

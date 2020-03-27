@@ -44,6 +44,7 @@ func _server_creation():
 	if status == OK:
 		get_tree().set_network_peer(peer)
 		$LobbyInfoBox.text += "Server listening to %d\n" % SERVER_PORT
+		$StartGame.show()
 		emit_signal("game_created")
 #		get_tree().get_root().add_child(Server.new())
 	else:
