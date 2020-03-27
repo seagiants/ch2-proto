@@ -11,14 +11,30 @@ var _map = [] setget set_map, get_map
 var _turn = 0 setget set_turn, get_turn
 var _locos_exited = 0 setget set_locos_exited, get_locos_exited
 
+#func _init():
+#	generate_map(64,5)
+#	print("Initmpap : %s" % _map.size())	
+#	rpc("set_game_map",_map)
+#	var player
+#	for i in [0,1]:
+#			player = PlayerState.new(i,Vector2(0,1+i*separation))
+#			players.append(player)
 func _init():
-	var player
-	generate_map(64,5)
-#	print("Initmpap : %s" % _map.size())
-	for i in [0,1]:
-		player = PlayerState.new(i,Vector2(0,1+i*separation))
-		players.append(player)
+	if get_tree().is_network_server() :
+		var player
+		generate_map(64,5)
+	#	print("Initmpap : %s" % _map.size())
+		for i in [0,1]:
+			player = PlayerState.new(i,Vector2(0,1+i*separation))
+			players.append(player)
 
+#remote func get_game_map():
+#	print("GameState")
+#	var nstate =  {
+#		"players":players.duplicate(true),
+#		"map": _map.duplicate(true)
+#	}	
+#	k
 func set_map(nmap: Array):
 	_map = nmap
 

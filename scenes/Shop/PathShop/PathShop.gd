@@ -8,18 +8,19 @@ var path_selected = null
 var paths
 
 func _ready():
+	var player_id = get_tree().get_network_unique_id()
 	shop = DragShop.instance()
 	add_child(shop)
-	paths = GameState.draw_new_paths()
+	paths = GameState.draw_new_paths(player_id)
 #	var paths = GameState.draw_new_paths()
 	var index = 0
 	for path in  paths:
 #		add_path(path)
-		add_path(path,index)
+		add_path(path,index,player_id)
 		index  += 1
 
 #D'abord prendre une miniature de la map et ajouter les rails dessus
-func add_path(path : Array, index = 0):
+func add_path(path : Array, index, player_id):
 #	var path = PathFactory.get_item(paths)
 	var new_map = Map.instance()
 	new_map.preview()
@@ -30,7 +31,7 @@ func add_path(path : Array, index = 0):
 #	var new = Control.new()
 	shop.add_drag(new_map)
 	new_map.connect("map_clicked",self,"on_map_clicked")
-	new_map.init_rails(0,path)
+	new_map.init_rails(player_id,path)
 
 func get_path_selected():
 	if path_selected != null :

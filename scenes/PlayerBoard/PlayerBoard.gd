@@ -3,12 +3,13 @@ extends PanelContainer
 var hero_box
 var item_box
 var stat_box
+onready var player_id = get_tree().get_network_unique_id()
 
 func _ready():
 	hero_box = get_node("HBoxContainer/HeroBox")		
 	item_box = get_node("HBoxContainer/ItemBox")
-	var hero_pool = GameState.players[0].get_heroPool()
-	var item_pool = GameState.players[0].get_itemPool()
+	var hero_pool = GameState.get_player(player_id).get_heroPool()
+	var item_pool = GameState.get_player(player_id).get_itemPool()
 	for index in range(hero_box.get_child_count()):
 		var cont = hero_box.get_child(index)
 		cont.connect("hero_dropped",self,"on_hero_dropped")
@@ -35,7 +36,7 @@ func add_item(item,index):
 	item_box.get_child(index).add_child(item)
 
 func on_hero_dropped(hero):
-	GameState.players[0].add_hero(hero)
+	GameState.get_player(player_id).add_hero(hero)
 
 func on_item_dropped(item):
-	GameState.players[0].add_item(item)
+	GameState.get_player(player_id).add_item(item)

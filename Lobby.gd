@@ -1,13 +1,18 @@
 extends Node2D
 
+#const Server = preload("res://network/server.gd")
+
 var SERVER_IP = "127.0.0.1"
 var SERVER_PORT = 9000
-var MAX_PLAYERS = 2
+var MAX_PLAYERS = 1
 
 var IPS = {
 	"localhost": "127.0.0.1",
 	"Eric": "192.168.0.0"
 }
+
+signal game_created()
+signal player_joined_game(player_id)
 
 func _ready():
 	
@@ -15,17 +20,20 @@ func _ready():
 	$IPSelect.add_item("Eric")
 	
 	$LobbyInfoBox.text += "This is the place\n"
-	
-	$ServerButton.connect("create_server", self, "_server_creation")
-	$ClientButton.connect("client_connection", self, "_client_connection")
-	$SendChatMessage.connect("send_chat_message", self, "_on_send_message")
-	
-	get_tree().connect("network_peer_connected", self, "_player_connected")	
-	get_tree().connect("connection_failed", self, "_connected_fail")
+	var _connect
+	_connect = $ServerButton.connect("create_server", self, "_server_creation")
+	_connect = $ClientButton.connect("client_connection", self, "_client_connection")
+	_connect = $SendChatMessage.connect("send_chat_message", self, "_on_send_message")
+	_connect = $StartGame.connect("pressed",GameState.get_node("Network"),"_on_game_started")
+	_connect = self.connect("player_joined_game",GameState.get_node("Network"),"_on_player_joined")
+	_connect = self.connect("game_created",GameState.get_node("Network"),"_on_game_created")
+	_connect = get_tree().connect("network_peer_connected", self, "_player_connected")	
+	_connect = get_tree().connect("connection_failed", self, "_connected_fail")
 	
 func _player_connected(connected_player_id):
 	$LobbyInfoBox.text += "Player %s connected" % connected_player_id
-
+	emit_signal("player_joined_game",connected_player_id)
+	
 func _connected_fail():
 	$LobbyInfoBox.text += "Connection failed\n"
 	
@@ -36,6 +44,8 @@ func _server_creation():
 	if status == OK:
 		get_tree().set_network_peer(peer)
 		$LobbyInfoBox.text += "Server listening to %d\n" % SERVER_PORT
+		emit_signal("game_created")
+#		get_tree().get_root().add_child(Server.new())
 	else:
 		$LobbyInfoBox.text += "Error creating server (Error %d)\n" % status 
 

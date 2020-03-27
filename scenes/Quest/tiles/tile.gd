@@ -24,17 +24,14 @@ func _init(ncell, pos = Vector2(0,0), h = 80, w = 80):
 		var ncolor = TilesType.types[ncell.type].color
 		tile.color = ncolor
 		var label = Label.new()
-		label.text = ncell.index
+		label.text = str(ncell.index)
 		tile.add_child(label)
 	type = ncell.type
 	abPosition = Vector2(pos.x * h, pos.y * w)
 	tile.set_size(Vector2(h,w))
 	tile.set_position(abPosition)
 	tile.set_mouse_filter(Control.MOUSE_FILTER_PASS)
-#	randomize()
-#	colors.shuffle()
-	
-	index = pos
+	index = ncell.index
 	add_child(tile)
 	tile.connect("gui_input",self,"on_click")
 
