@@ -32,21 +32,21 @@ __meta__ = {
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 127.0
-margin_bottom = 67.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="ItemSprite" type="TextureRect" parent="HBoxContainer"]
 margin_right = 64.0
-margin_bottom = 64.0
+margin_bottom = 65.0
 texture = ExtResource( 2 )
 stretch_mode = 6
 
 [node name="ItemDescription" type="Label" parent="HBoxContainer"]
 margin_left = 69.0
-margin_right = 124.0
-margin_bottom = 64.0
+margin_right = 123.0
+margin_bottom = 65.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "Balblba

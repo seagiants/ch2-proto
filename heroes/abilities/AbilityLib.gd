@@ -1,5 +1,8 @@
 extends Node
 
+# FIXME dynamic function calls using a dictionnary
+# FIXME properties of functions should be valued based on conf
+
 const Ability_Description = {
 	"commerce":{
 		"description" : "+1 coin",
@@ -8,6 +11,10 @@ const Ability_Description = {
 	"recolte_bois":{
 		"description" : "+1 puissance",
 		"icon" : "FOREST"
+	},
+	"banque" : {
+		"description" : "+2 coin ; -1 puissance",
+		"icon" : "PLAIN" #FIXME change to BANK, add the icon
 	}
 }
 
@@ -41,3 +48,13 @@ func recolte_bois_resolver(state):
 	print("Resolve recolte_bois")
 	state.add_power(1)
 	return state
+
+# Bank fns
+func banque_cond(tile_type):
+	return tile_type == "PLAIN"
+
+func banque_resolver(state):
+	print("Resolving bank")
+	state.add_power(-1)
+	state.add_coin(1)
+	return(state)
