@@ -2,7 +2,7 @@ extends Node2D
 
 #const Server = preload("res://network/server.gd")
 
-var SERVER_IP = "127.0.0.1"
+var SERVER_IP = "0.0.0.0"
 var SERVER_PORT = 9000
 var MAX_PLAYERS = 1
 
