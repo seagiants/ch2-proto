@@ -45,7 +45,7 @@ func _server_creation():
 	var status = peer.create_server(SERVER_PORT, MAX_PLAYERS)
 	if status == OK:
 		get_tree().set_network_peer(peer)
-		$LobbyInfoBox.text += "Server listening to %d\n" % SERVER_PORT
+		$LobbyInfoBox.text += "Server listening to %s:%d\n" % [ SERVER_IP, SERVER_PORT ]
 		$ClientButton.hide()
 		$StartGame.show()
 		emit_signal("game_created")
