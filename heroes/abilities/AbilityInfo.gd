@@ -15,3 +15,4 @@ func init(ability_name):
 	nameLabel.text = ability_name
 	descriptionLabel.text = ability_description.description
 	icon.color = TilesType.types[ability_description.icon].color
+#	set_z_index()

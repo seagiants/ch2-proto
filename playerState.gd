@@ -8,6 +8,8 @@ var _heroPool = [] setget set_heroPool,get_heroPool
 var _itemPool = [] setget set_itemPool,get_itemPool
 var _loco_position setget set_loco_position, get_loco_position
 var _path = [0,0,0] setget set_path, get_path
+var _player_color = Color(0,0,0,1) setget set_player_color, get_player_color
+var _player_name = "John Doe" setget set_player_name, get_player_name
 #var _move_index = 0 setget set_move_index,get_move_index
 
 signal loco_stats_changed()
@@ -26,7 +28,9 @@ func player_state_to_json():
 		"_heroPool":_heroPool,
 		"_itemPool":_itemPool,
 		"_loco_position":_loco_position,
-		"_path":_path
+		"_path":_path		
+#		"_path":_path,
+#		"_player_color": _player_color
 	}
 
 func update_from_json(json_player_state):
@@ -73,6 +77,18 @@ func get_path():
 
 func set_path(npath : Array):
 	_path = npath
+	
+func get_player_color():
+	return _player_color
+
+func set_player_color(ncolor : Color):
+	_player_color = ncolor
+
+func get_player_name():
+	return _player_name
+
+func set_player_name(nname : String):
+	_player_name = nname
 	
 func get_index():
 	return _index

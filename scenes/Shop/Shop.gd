@@ -7,6 +7,13 @@ signal player_ready_in_shop(player_state)
 
 func _ready():
 	var _connect = self.connect("player_ready_in_shop",GameState.get_node("Network"),"_on_player_ready_in_shop")
+	
+
+#func _init():
+#	GameState.add_player("1")
+#	#Used for unit test.
+#	if GameState.get_players().size == 0:
+		
 
 func _on_Simone_pressed():
 	var selected_path = $VSplitContainer/PathShop.get_path_selected()

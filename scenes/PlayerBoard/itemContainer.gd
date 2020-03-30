@@ -4,7 +4,7 @@ signal item_dropped(item)
 
 #Fired dropping a node is offered
 func can_drop_data(_pos, data):
-	return data.caracs.class == "Item" and get_child_count() == 0
+	return data.caracs.type == "Item" and get_child_count() == 0
 
 #Fired when dropping a node on it
 func drop_data(_pos, data):

@@ -7,7 +7,14 @@ func _ready():
 
 #Fired dropping a node is offered
 func can_drop_data(_pos, data):
-	return data.caracs.class == "Hero" and get_child_count() == 0
+	if data.caracs.type != "Hero":
+		return false
+	if get_child_count() == 0:
+		return true
+	if get_child(0).accept(data) == true:
+		return true
+	else:
+		return false
 
 #Fired when dropping a node on it
 func drop_data(_pos, data):

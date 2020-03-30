@@ -2,8 +2,8 @@ extends Node
 
 const Item_Lib = {
 	"voltage" : {
-		"class" : "Item",
-		"type" : "voltage",
+		"type" : "Item",
+		"name" : "voltage",
 		"description" : "Mettez un lion dans votre moteur"
 	}
 }
