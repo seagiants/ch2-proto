@@ -15,7 +15,7 @@ const RACELIB = {
 	}
 }
 
-func _ready(pre_init = true):
+func _ready(pre_init = false):
 	#Use just for test-unit purpose
 	if pre_init == true :
 		var Lib = preload("HeroLib.gd").new() 
@@ -26,10 +26,14 @@ func init(ncaracs : Dictionary):
 	$VBoxContainer/Label.set_text(caracs.name+"\n"+caracs.race)
 	set_race_color()
 	for ability in caracs.abilities:
+		add_ability(ability)
+
+#Adding display for an ability
+func add_ability(ability_name):
 		var info_desc = AbilityLabel.instance()
 		$VBoxContainer.add_child(info_desc)	
-		info_desc.init(ability)
-	
+		info_desc.init(ability_name)
+
 func get_abilities():
 	return caracs.abilities
 
@@ -46,4 +50,12 @@ func set_race_color():
 #	get("custom_styles/panel").set_bg_color(get_race_color())
 
 func accept(ncaras):
-	return caracs.race == ncaras.race
+	return caracs.race == ncaras.caracs.race
+
+func upgrade_hero(ncaracs):
+	for ability in ncaracs.abilities:
+		if not(ability in caracs.abilities):
+			#Update the local state, adding new ability
+			caracs.abilities.append(ability)
+			#Update the hero display
+			add_ability(ability)

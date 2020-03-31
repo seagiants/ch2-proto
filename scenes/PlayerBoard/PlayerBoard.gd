@@ -13,6 +13,7 @@ func _ready():
 	for index in range(hero_box.get_child_count()):
 		var cont = hero_box.get_child(index)
 		cont.connect("hero_dropped",self,"on_hero_dropped")
+		cont.connect("hero_updated",self,"on_hero_updated")
 	for index in range(item_box.get_child_count()):
 		var cont = item_box.get_child(index)
 		cont.connect("item_dropped",self,"on_item_dropped")
@@ -37,6 +38,9 @@ func add_item(item,index):
 
 func on_hero_dropped(hero):
 	GameState.get_player(player_id).add_hero(hero)
+
+func on_hero_updated(hero):
+	GameState.get_player(player_id).update_hero(hero)
 
 func on_item_dropped(item):
 	GameState.get_player(player_id).add_item(item)

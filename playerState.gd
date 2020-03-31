@@ -164,3 +164,10 @@ func set_coin(ncoin: int):
 	
 func add_coin(ncoin: int):
 	set_coin(_coin + ncoin)
+
+func update_hero(ncaracs):
+	var hp = get_heroPool()
+	for i in hp.size():
+		if hp[i].hero_id == ncaracs.hero_id:
+			hp.remove(i)
+			hp.insert(i,ncaracs)
