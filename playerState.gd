@@ -13,10 +13,12 @@ var _player_name = "John Doe" setget set_player_name, get_player_name
 #var _move_index = 0 setget set_move_index,get_move_index
 
 signal loco_stats_changed()
+signal player_died(player_id)
 
 func _init(index = 0, pos = Vector2(0,1)):
 	_index = index
 	_loco_position = pos
+	var _con = self.connect("player_died",GameState,"on_player_died")
 
 func player_state_to_json():
 	return {
@@ -151,6 +153,8 @@ func get_hp():
 func set_hp(nhp: int):
 	_hp = nhp
 	emit_signal("loco_stats_changed")
+	if _hp <= 0:
+		emit_signal("player_died",get_name())
 
 func add_power(npower: int):
 	set_power(_power + npower)
@@ -171,3 +175,6 @@ func update_hero(ncaracs):
 		if hp[i].hero_id == ncaracs.hero_id:
 			hp.remove(i)
 			hp.insert(i,ncaracs)
+
+func resolve_attack(attack):
+	set_hp(get_hp()-attack)	

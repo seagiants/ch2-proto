@@ -16,5 +16,11 @@
 		"race" : "Human",
 		"name" : "Bill",
         "abilities" : ["banque"]
+    },
+    "Archer": {
+        "type": "Hero",
+		"race" : "Elf",
+		"name" : "Legolas",
+        "abilities" : ["rangedAttack"]
     }
 }

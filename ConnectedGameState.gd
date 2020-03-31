@@ -199,6 +199,9 @@ func on_loco_exited(_player_index):
 		advance_turn()
 		var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
 
+func on_player_died(player_id):
+	print("Player %s died !!!" % str(player_id))
+
 func update_player_states(player_states):
 #	print("playerStates")
 #	print(player_states)

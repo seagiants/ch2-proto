@@ -15,6 +15,10 @@ const Ability_Description = {
 	"banque" : {
 		"description" : "+2 coin ; -1 puissance",
 		"icon" : "PLAIN" #FIXME change to BANK, add the icon
+	},
+	"rangedAttack" : {
+		"description" : "1 attack sur joueur 1",
+		"icon" : "FOREST" #FIXME change to BANK, add the icon
 	}
 }
 
@@ -26,9 +30,9 @@ func filter_abilities(tileType, abilities):
 			nabilities.append(ability)
 	return nabilities
 
-func resolve_ability(ability,state):
+func resolve_ability(ability,player_state):
 	var f = funcref(self,"%s_resolver" % ability)
-	return f.call_func(state)
+	return f.call_func(player_state)
 	
 func get_ability_description(ability_name):
 	return Ability_Description[ability_name]
@@ -36,7 +40,7 @@ func get_ability_description(ability_name):
 func commerce_cond(tile_type):
 	return tile_type == "PLAIN"
 	
-func commerce_resolver(state):
+func commerce_resolver(state,_ncaracs):
 	print("Resolve commerce")
 	state.add_coin(1)
 	return state
@@ -58,3 +62,14 @@ func banque_resolver(state):
 	state.add_power(-1)
 	state.add_coin(2)
 	return(state)
+
+# Range_Attack fns
+func rangedAttack_cond(tile_type):
+	return tile_type == "FOREST"
+
+func rangedAttack_resolver(state):
+	print("Resolve rangedAttack")
+	for player in GameState.get_players():
+		if player.get_name() != state.get_name():
+			player.resolve_attack(1)
+	return state
