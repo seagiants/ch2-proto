@@ -7,6 +7,11 @@ signal map_clicked(tile_index)
 
 #Used to retrieve picked path in pathShop
 var index = 0
+#To refactor : à consolider avec les conditions des abilités côté héros, là c'est quick&dirty
+var abilities = {
+	"MOUNTAIN" : ["working"]
+}
+
 
 func init():	
 #	var length = 4
@@ -65,26 +70,44 @@ func get_loco_tile(player_index):
 	var out = get_node(pos_to_name(start)) 
 	return out
 
+#To refactor : A consolider avec le get_abilities côté playerState
+func get_abilities(cell_type):
+	if cell_type in abilities.keys():
+		return abilities[cell_type]
+	else:
+		return []
+	
+#To refactor, dans le GameState ou playerState. Ici devrait y avoir que la partie bouger un icone de Loco.
 func advance_loco(player_id):
 	var start = get_loco_tile(player_id)
 	#Pas de position pour la loco = loco exited (à améliorer)
 	if start == null :
-		return
+		return false
 	var loco = start.content
 	var next_move = GameState.get_player(player_id).get_next_move()
+	#Ajout d'un move par défaut pour les tests principalement.
 	if next_move == null :
 		next_move = 0
 #		print("Arrivé à la station")
+	#Récupération de la position après move
 	var pos_end = start.index + Vector2(1,next_move)
-	start.remove_child(loco)
-	start.remove_from_group("Loco")
-	start.content = null
-	if has_node(pos_to_name(pos_end)):
-		GameState.get_player(player_id).set_loco_position(pos_end)
-	if not(has_node(pos_to_name(pos_end))) or get_node(pos_to_name(pos_end)).type == "STATION":
-		emit_signal("loco_exited",player_id)
-		loco.hide()
-		return
-	else:
-		var end = get_node(pos_to_name(pos_end))
-		end.add_content(loco)
+	#Vérifie que l'on peut avancer
+	var work_to_do = GameState.get_player(player_id).get_working_turn()
+	if work_to_do == 0 :			
+		start.remove_child(loco)
+		start.remove_from_group("Loco")
+		start.content = null
+		if has_node(pos_to_name(pos_end)):
+			GameState.get_player(player_id).set_loco_position(pos_end)
+		if not(has_node(pos_to_name(pos_end))) or get_node(pos_to_name(pos_end)).type == "STATION":
+			emit_signal("loco_exited",player_id)
+			loco.hide()
+			return true
+		else:
+			var end = get_node(pos_to_name(pos_end))
+			end.add_content(loco)
+			return true
+	#Doing work to do...
+	else :
+		GameState.get_player(player_id).set_working_turn(work_to_do - 1)
+		return false

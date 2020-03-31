@@ -1,6 +1,8 @@
 extends Node
 
-func get_heroes_lib():
+onready var _lib = load_heroes_lib()
+
+func load_heroes_lib():
 	"""
 	Load heroes library from the JSON file
 	"""
@@ -14,7 +16,9 @@ func get_heroes_lib():
 		print(heroes_classes)
 	return(lib)
 	
-
+func get_heroes_lib():
+	return _lib
+	
 func get_pool():
 	var Hero_Lib = get_heroes_lib()
 	return Hero_Lib.keys()

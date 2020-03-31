@@ -19,6 +19,10 @@ const Ability_Description = {
 	"rangedAttack" : {
 		"description" : "1 attack sur joueur 1",
 		"icon" : "FOREST" #FIXME change to BANK, add the icon
+	},
+	"working": {
+		"description" : "Du boulot pour 1 tour...",
+		"icon" : "MOUNTAIN"
 	}
 }
 
@@ -72,4 +76,14 @@ func rangedAttack_resolver(state):
 	for player in GameState.get_players():
 		if player.get_name() != state.get_name():
 			player.resolve_attack(1)
+	return state
+
+# Working fns
+func working_cond(tile_type):
+	return tile_type == "MOUNTAIN"
+
+func working_resolver(state):
+	print("Resolve working")
+	#A reprendre. Buggé.
+	state.set_working_turn(state.get_working_turn()+1)
 	return state

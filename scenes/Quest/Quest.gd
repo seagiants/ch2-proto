@@ -14,4 +14,9 @@ func on_map_clicked(_tile_index):
 		var cell_type = start.type
 		for ability in player.get_abilities(cell_type):
 			AbilityLib.resolve_ability(ability,player)
-		map.advance_loco(player_id)
+		if map.advance_loco(player_id):
+			var end = map.get_loco_tile(player_id)
+			if end != null :
+				cell_type = end.type
+				for ability in map.get_abilities(cell_type):
+					AbilityLib.resolve_ability(ability,player)

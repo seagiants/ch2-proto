@@ -3,6 +3,7 @@ extends Node
 var _index = 0 setget set_index,get_index
 var _coin = 15 setget set_coin,get_coin
 var _power = 1 setget set_power,get_power
+var _working_turn = 0 setget set_working_turn, get_working_turn
 var _hp = 5 setget set_hp,get_hp
 var _heroPool = [] setget set_heroPool,get_heroPool
 var _itemPool = [] setget set_itemPool,get_itemPool
@@ -10,6 +11,7 @@ var _loco_position setget set_loco_position, get_loco_position
 var _path = [0,0,0] setget set_path, get_path
 var _player_color = Color(0,0,0,1) setget set_player_color, get_player_color
 var _player_name = "John Doe" setget set_player_name, get_player_name
+
 #var _move_index = 0 setget set_move_index,get_move_index
 
 signal loco_stats_changed()
@@ -25,6 +27,7 @@ func player_state_to_json():
 		"id":get_name(),
 		"_index":_index,
 		"_coin":_coin,
+		"_working_turn":_working_turn,
 		"_power":_power,
 		"_hp":_hp,
 		"_heroPool":_heroPool,
@@ -79,6 +82,12 @@ func get_path():
 
 func set_path(npath : Array):
 	_path = npath
+	
+func get_working_turn():
+	return _working_turn
+
+func set_working_turn(nworking_turn : int):
+	_working_turn = nworking_turn
 	
 func get_player_color():
 	return _player_color
