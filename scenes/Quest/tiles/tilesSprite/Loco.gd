@@ -9,3 +9,5 @@ func _ready():
 
 func init(index):
 	player_index = index
+	if(index != '1'):
+		set_modulate(Color(0,0,1,1))

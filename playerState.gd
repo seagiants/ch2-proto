@@ -48,6 +48,12 @@ func get_starting_position():
 	return Vector2(0,1+2*_index)
 	
 func get_next_move():
+	if _path.size() == 0:
+		return 0
+	else :
+		return _path[0]
+	
+func pop_next_move():
 	return _path.pop_front()
 
 func get_avalaible_moves(pos = null):	
@@ -85,6 +91,16 @@ func set_path(npath : Array):
 	
 func get_working_turn():
 	return _working_turn
+
+func add_working_turn(nworking_turn: int):
+	 set_working_turn(_working_turn + nworking_turn)
+
+
+func is_advancing():
+	return get_working_turn() == 0
+
+func do_work():
+	add_working_turn(-1)
 
 func set_working_turn(nworking_turn : int):
 	_working_turn = nworking_turn

@@ -18,7 +18,15 @@ const Ability_Description = {
 	},
 	"rangedAttack" : {
 		"description" : "1 attack sur joueur 1",
-		"icon" : "FOREST" #FIXME change to BANK, add the icon
+		"icon" : "FOREST" 
+	},
+	"tunnel" : {
+		"description" : "Pas affecté",
+		"icon" : "MOUNTAIN" 
+	},
+	"greedy" : {
+		"description" : "+1 coin",
+		"icon" : "MOUNTAIN"
 	},
 	"working": {
 		"description" : "Du boulot pour 1 tour...",
@@ -65,6 +73,24 @@ func banque_resolver(state):
 	print("Resolving bank")
 	state.add_power(-1)
 	state.add_coin(2)
+	return(state)
+
+# Bank fns
+func tunnel_cond(tile_type):
+	return tile_type == "MOUNTAIN"
+
+func tunnel_resolver(state):
+	print("Resolving tunnel")
+	state.add_working_turn(-1)
+	return(state)
+
+# Bank fns
+func greedy_cond(tile_type):
+	return tile_type == "MOUNTAIN"
+
+func greedy_resolver(state):
+	print("Resolving greedy")
+	state.add_coin(1)
 	return(state)
 
 # Range_Attack fns

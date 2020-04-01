@@ -12,6 +12,9 @@ const RACELIB = {
 	},
 	"Elf":{
 		"color":Color(0.88,0.97,0.69,1)
+	},
+	"Dwarf":{
+		"color":Color(1,0.53,0.44,1)
 	}
 }
 

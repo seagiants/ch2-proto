@@ -7,6 +7,8 @@ var stat_box
 func _ready():
 	stat_box = get_node("HSplitContainer/LocoStats"	)
 	GameState.get_player(player_id).connect("loco_stats_changed",self,"on_loco_stats_changed")
+	if(player_id != 1):
+		$HSplitContainer/TextureRect.set_modulate(Color(0,0,1,1))
 	on_loco_stats_changed()
 
 func on_loco_stats_changed():

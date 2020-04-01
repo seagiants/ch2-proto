@@ -33,7 +33,7 @@ func init_loco(player_id):
 	get_node(pos_to_name(pos)).add_content(loco)
 
 func init_map(map : Array):
-	var _connect = self.connect("loco_exited",GameState,"on_loco_exited")
+#	var _connect = self.connect("loco_exited",GameState,"on_loco_exited")
 #	print("Mapsize : %s" % map.size())	
 	for i in map.size():
 		for j in map[i].size():
@@ -80,34 +80,81 @@ func get_abilities(cell_type):
 #To refactor, dans le GameState ou playerState. Ici devrait y avoir que la partie bouger un icone de Loco.
 func advance_loco(player_id):
 	var start = get_loco_tile(player_id)
+	var player = GameState.get_player(player_id) 
+	if not(player.is_advancing()):
+		player.do_work()
+		return false
 	#Pas de position pour la loco = loco exited (à améliorer)
 	if start == null :
 		return false
 	var loco = start.content
-	var next_move = GameState.get_player(player_id).get_next_move()
+	var next_move = player.get_next_move()
 	#Ajout d'un move par défaut pour les tests principalement.
 	if next_move == null :
 		next_move = 0
 #		print("Arrivé à la station")
 	#Récupération de la position après move
 	var pos_end = start.index + Vector2(1,next_move)
-	#Vérifie que l'on peut avancer
-	var work_to_do = GameState.get_player(player_id).get_working_turn()
-	if work_to_do == 0 :			
-		start.remove_child(loco)
-		start.remove_from_group("Loco")
-		start.content = null
-		if has_node(pos_to_name(pos_end)):
-			GameState.get_player(player_id).set_loco_position(pos_end)
-		if not(has_node(pos_to_name(pos_end))) or get_node(pos_to_name(pos_end)).type == "STATION":
-			emit_signal("loco_exited",player_id)
-			loco.hide()
-			return true
-		else:
-			var end = get_node(pos_to_name(pos_end))
-			end.add_content(loco)
-			return true
-	#Doing work to do...
-	else :
-		GameState.get_player(player_id).set_working_turn(work_to_do - 1)
-		return false
+	#Vérifier que l'on peut avancer
+	#1 - pas de boulot à faire
+	var end_cell =  pos_to_name(pos_end)
+	#2 - Personne sur la case destination
+	if 	has_node(end_cell) and get_node(end_cell).content != null :
+		return false	
+	start.remove_child(loco)
+	start.remove_from_group("Loco")
+	start.content = null
+	if has_node(pos_to_name(pos_end)):
+		player.set_loco_position(pos_end)
+	if not(has_node(pos_to_name(pos_end))) or get_node(pos_to_name(pos_end)).type == "STATION":
+		emit_signal("loco_exited",player_id)
+		loco.hide()
+		player.pop_next_move()
+		return true
+	else:
+		var end = get_node(pos_to_name(pos_end))
+		end.add_content(loco)
+		player.pop_next_move()
+		return true
+
+#func advance_loco(player_id):
+#	var start = get_loco_tile(player_id)
+#	var player = GameState.get_player(player_id) 
+#	#Pas de position pour la loco = loco exited (à améliorer)
+#	if start == null :
+#		return false
+#	var loco = start.content
+#	var next_move = player.get_next_move()
+#	#Ajout d'un move par défaut pour les tests principalement.
+#	if next_move == null :
+#		next_move = 0
+##		print("Arrivé à la station")
+#	#Récupération de la position après move
+#	var pos_end = start.index + Vector2(1,next_move)
+#	#Vérifier que l'on peut avancer
+#	#1 - pas de boulot à faire
+#	var work_to_do = player.get_working_turn()
+#	if work_to_do == 0 :
+#		var end_cell =  pos_to_name(pos_end)
+#		#2 - Personne sur la case destination
+#		if 	has_node(end_cell) and get_node(end_cell).content != null :
+#			return false	
+#		start.remove_child(loco)
+#		start.remove_from_group("Loco")
+#		start.content = null
+#		if has_node(pos_to_name(pos_end)):
+#			player.set_loco_position(pos_end)
+#		if not(has_node(pos_to_name(pos_end))) or get_node(pos_to_name(pos_end)).type == "STATION":
+#			emit_signal("loco_exited",player_id)
+#			loco.hide()
+#			player.pop_next_move()
+#			return true
+#		else:
+#			var end = get_node(pos_to_name(pos_end))
+#			end.add_content(loco)
+#			player.pop_next_move()
+#			return true
+#	#Doing work to do...
+#	else :
+#		player.set_working_turn(work_to_do - 1)
+#		return false

@@ -22,5 +22,17 @@
 		"race" : "Elf",
 		"name" : "Legolas",
         "abilities" : ["rangedAttack"]
-    }
+    },
+	"Tunneler": {
+        "type": "Hero",
+		"race" : "Dwarf",
+		"name" : "Gimli",
+        "abilities" : ["tunnel"]
+    },
+	"MountainBanquier": {
+        "type": "Hero",
+		"race" : "Dwarf",
+		"name" : "Tod",
+        "abilities" : ["greedy"]
+    },
 }

@@ -39,6 +39,12 @@ func get_players():
 #	print(get_tree().get_nodes_in_group("PLAYERS"))
 	return get_tree().get_nodes_in_group("PLAYERS")
 
+func get_players_id():
+	var players_id = []
+	for player in get_players():
+		players_id.append(player.get_name())
+	return players_id
+
 func get_player(player_id):
 	for player in get_players():
 #		print(player.get_name())
@@ -191,13 +197,17 @@ func draw_new_paths(player_id, length = 3, nb = 3):
 #			print(str(avalaible_moves)+"->"+str(picked_move)+ ":"+str(amplitude))
 	return paths
 
-func on_loco_exited(_player_index):
-	add_loco_exited()
-#	print("exited : %s" % get_locos_exited())
-	if get_locos_exited() == get_players().size():
-		set_locos_exited(0)
-		advance_turn()
-		var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
+func on_quest_finished():
+	advance_turn()
+	var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
+
+#func on_loco_exited(_player_index):
+#	add_loco_exited()
+##	print("exited : %s" % get_locos_exited())
+#	if get_locos_exited() == get_players().size():
+#		set_locos_exited(0)
+#		advance_turn()
+#		var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
 
 func on_player_died(player_id):
 	print("Player %s died !!!" % str(player_id))

@@ -4,7 +4,7 @@
 [ext_resource path="res://FontFredoka.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.882353, 0.972549, 0.686275, 1 )
+bg_color = Color( 1, 0.53323, 0.441406, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
