@@ -11,11 +11,14 @@ var _loco_position setget set_loco_position, get_loco_position
 var _path = [0,0,0] setget set_path, get_path
 var _player_color = Color(0,0,0,1) setget set_player_color, get_player_color
 var _player_name = "John Doe" setget set_player_name, get_player_name
-
+var _heroes_level = 2 setget set_heroes_level, get_heroes_level
 #var _move_index = 0 setget set_move_index,get_move_index
 
-signal loco_stats_changed()
+#signal loco_stats_changed()
 signal player_died(player_id)
+signal player_stats_changed(player_id,stat_name,old_value,new_value)
+signal player_moved(player_id,old,new)
+signal player_heroes_changed(player_id,level_type,old,new)
 
 func _init(index = 0, pos = Vector2(0,1)):
 	_index = index
@@ -133,7 +136,9 @@ func reinit_loco_position():
 	set_loco_position(Vector2(0,get_loco_position()[1]))
 
 func set_loco_position(pos):
+	var old = _loco_position
 	_loco_position = pos
+	emit_signal("player_moved",get_name(),old,pos)
 
 func get_loco_position():
 	return _loco_position
@@ -169,15 +174,19 @@ func get_power():
 	return _power
 
 func set_power(npower: int):
-	_power = npower
-	emit_signal("loco_stats_changed")
+	var old = _power
+	_power = npower	
+	emit_signal("player_stats_changed",get_name(),"power",old,npower)
+#	emit_signal("loco_stats_changed")
 	
 func get_hp():
 	return _hp
 
 func set_hp(nhp: int):
+	var old = _hp
 	_hp = nhp
-	emit_signal("loco_stats_changed")
+	emit_signal("player_stats_changed",get_name(),"hp",old,nhp)
+#	emit_signal("loco_stats_changed")
 	if _hp <= 0:
 		emit_signal("player_died",get_name())
 
@@ -188,11 +197,23 @@ func get_coin():
 	return _coin
 
 func set_coin(ncoin: int):
+	var old = _coin
 	_coin = ncoin
-	emit_signal("loco_stats_changed")
+	emit_signal("player_stats_changed",get_name(),"coin",old,ncoin)
+#	emit_signal("loco_stats_changed")
 	
 func add_coin(ncoin: int):
 	set_coin(_coin + ncoin)
+
+func get_heroes_level():
+	return _heroes_level
+
+func set_heroes_level(nlevel: int):
+	var old = _heroes_level
+	_heroes_level = nlevel
+	emit_signal("player_level_changed",get_name(),"heroes",old,nlevel)
+#	emit_signal("loco_stats_changed")
+
 
 func update_hero(ncaracs):
 	var hp = get_heroPool()

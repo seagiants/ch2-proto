@@ -127,9 +127,14 @@ func generate_map(h,v):
 				type = "STATION"
 			else:
 				type = pool[i+j*h]
+			var abilities = []
+			match type:
+				"MOUNTAIN":
+					abilities.append("working")
 			var tile = {
 				"type": type,
-				"index": Vector2(i,j)
+				"index": Vector2(i,j),
+				"abilities": abilities
 #				"index": str(i)+"x"+str(j)
 			}
 #			pool[i+j*h].index = str(i)+"x"+str(j)
@@ -201,14 +206,6 @@ func on_quest_finished():
 	advance_turn()
 	var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
 
-#func on_loco_exited(_player_index):
-#	add_loco_exited()
-##	print("exited : %s" % get_locos_exited())
-#	if get_locos_exited() == get_players().size():
-#		set_locos_exited(0)
-#		advance_turn()
-#		var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
-
 func on_player_died(player_id):
 	print("Player %s died !!!" % str(player_id))
 
@@ -227,3 +224,11 @@ func get_players_json():
 	for player in player_states:
 		json_states.append(player.player_state_to_json())
 	return json_states
+
+func get_cell_abilities(pos):
+	print(get_map()[pos[0]][pos[1]])
+	return get_map()[pos[0]][pos[1]].abilities
+
+#Delete the mountain ability of working
+func tunnel_cell(pos):
+	get_map()[pos[0]][pos[1]].abilities.erase("working")

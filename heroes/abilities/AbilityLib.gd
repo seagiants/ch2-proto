@@ -3,6 +3,8 @@ extends Node
 # FIXME dynamic function calls using a dictionnary
 # FIXME properties of functions should be valued based on conf
 
+signal ability_resolved(player_id,ability_name)
+
 const Ability_Description = {
 	"commerce":{
 		"description" : "+1 coin",
@@ -17,7 +19,7 @@ const Ability_Description = {
 		"icon" : "PLAIN" #FIXME change to BANK, add the icon
 	},
 	"rangedAttack" : {
-		"description" : "1 attack sur joueur 1",
+		"description" : "1 attack sur tt joueurs",
 		"icon" : "FOREST" 
 	},
 	"tunnel" : {
@@ -44,6 +46,7 @@ func filter_abilities(tileType, abilities):
 
 func resolve_ability(ability,player_state):
 	var f = funcref(self,"%s_resolver" % ability)
+	emit_signal("ability_resolved",player_state.get_name(),ability)
 	return f.call_func(player_state)
 	
 func get_ability_description(ability_name):
@@ -52,7 +55,7 @@ func get_ability_description(ability_name):
 func commerce_cond(tile_type):
 	return tile_type == "PLAIN"
 	
-func commerce_resolver(state,_ncaracs):
+func commerce_resolver(state):
 	print("Resolve commerce")
 	state.add_coin(1)
 	return state
@@ -81,6 +84,7 @@ func tunnel_cond(tile_type):
 
 func tunnel_resolver(state):
 	print("Resolving tunnel")
+#	print(state)
 	state.add_working_turn(-1)
 	return(state)
 
@@ -112,4 +116,6 @@ func working_resolver(state):
 	print("Resolve working")
 	#A reprendre. Buggé.
 	state.set_working_turn(state.get_working_turn()+1)
+	GameState.tunnel_cell(state.get_loco_position())
 	return state
+	
