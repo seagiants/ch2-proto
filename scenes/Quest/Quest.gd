@@ -24,16 +24,20 @@ func on_map_clicked(_tile_index):
 		var player_id = player.get_name()
 		if not(player_id in _players_on_map):
 			return
-		var start = map.get_loco_tile(player_id)
-		var cell_type = start.type
-		for ability in player.get_abilities(cell_type):
-			AbilityLib.resolve_ability(ability,player)
-		if map.advance_loco(player_id):
-			var end = map.get_loco_tile(player_id)
-			if end != null :
-				cell_type = end.type
-				for ability in map.get_abilities(cell_type):
-					AbilityLib.resolve_ability(ability,player)
+		resolve_player_turn(player_id)
+
+func resolve_player_turn(player_id):
+	var player = GameState.get_player(player_id)
+	var start = map.get_loco_tile(player_id)
+	var cell_type = start.type
+	for ability in player.get_abilities(cell_type):
+		AbilityLib.resolve_ability(ability,player)
+	if map.advance_loco(player_id):
+		var end = map.get_loco_tile(player_id)
+		if end != null :
+			cell_type = end.type
+			for ability in map.get_abilities(cell_type):
+				AbilityLib.resolve_ability(ability,player)
 
 func on_loco_exited(p_id):
 	_players_on_map.erase(p_id)

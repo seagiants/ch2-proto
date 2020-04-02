@@ -22,7 +22,7 @@ func init():
 
 func preview():
 	var npreview = GameState.get_current_map(true) 
-	init_map(npreview)
+	init_map(npreview,true)
 
 func init_loco(player_id):
 	var loco = Loco.instance()
@@ -32,7 +32,7 @@ func init_loco(player_id):
 #	GameState.players[player_index].set_loco_position(pos)
 	get_node(pos_to_name(pos)).add_content(loco)
 
-func init_map(map : Array):
+func init_map(map : Array, is_preview = false):
 #	var _connect = self.connect("loco_exited",GameState,"on_loco_exited")
 #	print("Mapsize : %s" % map.size())	
 	for i in map.size():
@@ -43,7 +43,9 @@ func init_map(map : Array):
 			add_child(cell)
 			cell.set_name(pos_to_name(template.index))
 			cell.connect("tile_clicked",self,"on_tile_clicked")
-	
+			#Used to show the path // doesn't render well
+#			if is_preview:
+#				cell.modulate = Color(0,0,0,0.85)
 
 func init_rails(player_id, path =null):
 	if path == null :
@@ -56,7 +58,10 @@ func init_rails(player_id, path =null):
 		cells.append(next)
 	for cell in cells:
 #		pass
-		get_node(pos_to_name(cell)).add_rail()
+		var tile = get_node(pos_to_name(cell)) 
+		tile.add_rail()
+		#preview on path should be enhanced.
+#		tile.modulate = Color(1,1,1,1)
 		
 func pos_to_name(pos: Vector2):
 	var text = str(pos[0])+"x"+str(pos[1]) 
@@ -85,8 +90,8 @@ func advance_loco(player_id):
 		player.do_work()
 		return false
 	#Pas de position pour la loco = loco exited (à améliorer)
-	if start == null :
-		return false
+#	if start == null :
+#		return false
 	var loco = start.content
 	var next_move = player.get_next_move()
 	#Ajout d'un move par défaut pour les tests principalement.
