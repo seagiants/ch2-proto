@@ -7,30 +7,37 @@ signal ability_resolved(player_id,ability_name)
 
 const Ability_Description = {
 	"commerce":{
+		"name":"Commerçant",
 		"description" : "+1 coin",
 		"icon" : "PLAIN"
 	},
 	"recolte_bois":{
+		"name": "Bucheron",
 		"description" : "+1 puissance",
 		"icon" : "FOREST"
 	},
 	"banque" : {
+		"name": "Banquier",
 		"description" : "+2 coin ; -1 puissance",
 		"icon" : "PLAIN" #FIXME change to BANK, add the icon
 	},
 	"rangedAttack" : {
+		"name": "Ranger",
 		"description" : "1 attack sur tt joueurs",
 		"icon" : "FOREST" 
 	},
 	"tunnel" : {
+		"name": "Ingénieur",
 		"description" : "Pas affecté",
 		"icon" : "MOUNTAIN" 
 	},
 	"greedy" : {
+		"name": "Mineur",
 		"description" : "+1 coin",
 		"icon" : "MOUNTAIN"
 	},
 	"working": {
+		"name": "Montagne",
 		"description" : "Du boulot pour 1 tour...",
 		"icon" : "MOUNTAIN"
 	}

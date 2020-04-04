@@ -151,8 +151,9 @@ func draw_new_items(nb = 3):
 		draws.append(draw)	
 	return draws
 
-func draw_new_heroes(nb = 3):
-	
+func draw_new_heroes(nb = 3):	
+#	if player_id != null:
+#		nb = get_player(player_id).get_heroes_level()
 	var draws = []
 	var pools = HeroLib.get_pool()	
 	for _i in range(nb):
@@ -168,7 +169,7 @@ func generate_hero_id():
 	return randi()
 
 # A path is just an array of y-move (-1 or 0 or 1) limited by -1/+1 from the stating pos
-func draw_new_paths(player_id, length = 3, nb = 3):
+func draw_new_paths(player_id, nb = 3, length = 3):
 	var paths = []
 	randomize()
 	#Path is just an array of y-move

@@ -12,7 +12,7 @@ func _ready():
 func init(ab_name = null):
 	if ab_name != null:
 		abilityName = ab_name
-	$AbilityLabel.set_text(abilityName)
+	$AbilityLabel.set_text(AbilityLib.Ability_Description[abilityName].name)
 	abilityInfo = AbilityInfo.instance()
 	abilityInfo.init(abilityName)			
 	$AbilityLabel.add_child(abilityInfo)

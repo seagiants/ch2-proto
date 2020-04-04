@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Shop/ShopLvlUp.gd" type="Script" id=2]
+[ext_resource path="res://assets/plus.png" type="Texture" id=3]
+
+[node name="TextureRect" type="TextureRect"]
+margin_left = 16.0
+margin_top = 29.0
+margin_right = 80.0
+margin_bottom = 93.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

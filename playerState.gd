@@ -12,13 +12,16 @@ var _path = [0,0,0] setget set_path, get_path
 var _player_color = Color(0,0,0,1) setget set_player_color, get_player_color
 var _player_name = "John Doe" setget set_player_name, get_player_name
 var _heroes_level = 2 setget set_heroes_level, get_heroes_level
+var _paths_level = 2 setget set_paths_level, get_paths_level
+var _items_level = 0 setget set_items_level, get_items_level
 #var _move_index = 0 setget set_move_index,get_move_index
 
 #signal loco_stats_changed()
 signal player_died(player_id)
 signal player_stats_changed(player_id,stat_name,old_value,new_value)
 signal player_moved(player_id,old,new)
-signal player_heroes_changed(player_id,level_type,old,new)
+#signal player_heroes_changed(player_id,level_type,old,new)
+signal player_level_changed(player_id,level_type,old,nlevel)
 
 func _init(index = 0, pos = Vector2(0,1)):
 	_index = index
@@ -214,6 +217,41 @@ func set_heroes_level(nlevel: int):
 	emit_signal("player_level_changed",get_name(),"heroes",old,nlevel)
 #	emit_signal("loco_stats_changed")
 
+func up_heroes_level():
+	self._heroes_level += 1
+
+func on_hero_lvl_up(_player_id):
+	up_heroes_level()
+	
+func get_items_level():
+	return _items_level
+
+func set_items_level(nlevel: int):
+	var old = _items_level
+	_items_level = nlevel
+	emit_signal("player_level_changed",get_name(),"items",old,nlevel)
+#	emit_signal("loco_stats_changed")
+
+func up_items_level():
+	self._items_level += 1
+
+func on_item_lvl_up(_player_id):
+	up_items_level()
+	
+func get_paths_level():
+	return _paths_level
+
+func set_paths_level(nlevel: int):
+	var old = _paths_level
+	_paths_level = nlevel
+	emit_signal("player_level_changed",get_name(),"paths",old,nlevel)
+#	emit_signal("loco_stats_changed")
+
+func up_paths_level():
+	self._paths_level += 1
+
+func on_path_lvl_up(_player_id):
+	up_paths_level()
 
 func update_hero(ncaracs):
 	var hp = get_heroPool()

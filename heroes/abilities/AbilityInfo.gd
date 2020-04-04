@@ -12,7 +12,7 @@ func init(ability_name):
 	var descriptionLabel = get_node("AbilityInfo/MarginContainer/VSplitContainer/HBoxContainer/DescriptionLabel")
 	var icon = get_node("AbilityInfo/MarginContainer/VSplitContainer/HBoxContainer/ColorRect")
 	var ability_description = AbilityLib.Ability_Description[ability_name]
-	nameLabel.text = ability_name
+	nameLabel.text = ability_description.name
 	descriptionLabel.text = ability_description.description
 	icon.color = TilesType.types[ability_description.icon].color
 #	set_z_index()
