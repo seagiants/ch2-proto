@@ -28,18 +28,18 @@ func _ready():
 	#Add first paths
 	paths = GameState.draw_new_paths(player_id,nb)
 #	var paths = GameState.draw_new_paths()
-	var index = 0
+#	var index = 0
 	for path in  paths:
 #		add_path(path)
-		add_path(path,index,player_id)
-		index  += 1
+		add_path(path,player_id)
+#		index  += 1
 
 #D'abord prendre une miniature de la map et ajouter les rails dessus
-func add_path(path: Array, index, nplayer_id):
+func add_path(path: Array, nplayer_id):
 #	var path = PathFactory.get_item(paths)
 	var new_map = Map.instance()
 	new_map.preview()
-	new_map.index = index
+#	new_map.index = index
 	new_map.set_scale(Vector2(0.25,0.25))
 	new_map.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 #	new_map.preview = true
@@ -64,5 +64,5 @@ func on_map_clicked(map_index):
 		path_selected = null
 
 func on_lvl_up(_type_name):
-	add_path(GameState.draw_new_paths(player_id,1)[0],0,player_id)
+	add_path(GameState.draw_new_paths(player_id,1)[0],player_id)
 	emit_signal("path_lvl_up",player_id)

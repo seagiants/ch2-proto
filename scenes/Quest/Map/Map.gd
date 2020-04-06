@@ -6,7 +6,7 @@ const Loco = preload("res://scenes/Quest/tiles/tilesSprite/LocoTiles.tscn")
 signal map_clicked(tile_index)
 
 #Used to retrieve picked path in pathShop
-var index = 0
+#var index = 0
 #To refactor : à consolider avec les conditions des abilités côté héros, là c'est quick&dirty
 #var abilities = {
 #	"MOUNTAIN" : [{"ability_name":"working","atts":{}}]
@@ -68,7 +68,7 @@ func pos_to_name(pos: Vector2):
 	return text
 
 func on_tile_clicked(_ctile):	
-	emit_signal("map_clicked",index)
+	emit_signal("map_clicked",get_parent().get_position_in_parent())
 
 func get_loco_tile(player_index):
 	var start = GameState.get_player(player_index).get_loco_position()
@@ -88,51 +88,3 @@ func move_loco(player_id,pos):
 	var end = get_node(pos_to_name(pos))
 	end.add_content(loco)
 	return true
-
-
-##To refactor : A consolider avec le get_abilities côté playerState
-#func get_abilities(cell_type):
-#	if cell_type in abilities.keys():
-#		return abilities[cell_type]
-#	else:
-#		return []
-	
-##To refactor, dans le GameState ou playerState. Ici devrait y avoir que la partie bouger un icone de Loco.
-#func advance_loco(player_id):
-#	var start = get_loco_tile(player_id)
-#	var player = GameState.get_player(player_id) 
-#	if not(player.is_advancing()):
-#		player.do_work()
-#		return false
-#	#Pas de position pour la loco = loco exited (à améliorer)
-##	if start == null :
-##		return false
-##	var loco = start.content
-#	var next_move = player.get_next_move()
-#	#Ajout d'un move par défaut pour les tests principalement.
-#	if next_move == null :
-#		next_move = 0
-##		print("Arrivé à la station")
-#	#Récupération de la position après move
-#	var pos_end = start.index + Vector2(1,next_move)
-#	#Vérifier que l'on peut avancer
-#	#1 - pas de boulot à faire
-#	var end_cell =  pos_to_name(pos_end)
-#	#2 - Personne sur la case destination
-#	if 	has_node(end_cell) and get_node(end_cell).content != null :
-#		return false	
-##	start.remove_child(loco)
-##	start.remove_from_group("Loco")
-##	start.content = null
-#	if has_node(pos_to_name(pos_end)):
-#		player.set_loco_position(pos_end)
-#	if not(has_node(pos_to_name(pos_end))) or get_node(pos_to_name(pos_end)).type == "STATION":
-#		emit_signal("loco_exited",player_id)
-##		loco.hide()
-#		player.pop_next_move()
-#		return true
-#	else:
-#		var end = get_node(pos_to_name(pos_end))
-##		end.add_content(loco)
-#		player.pop_next_move()
-#		return true
