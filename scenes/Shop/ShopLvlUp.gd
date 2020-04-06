@@ -17,4 +17,4 @@ func init(stat,lvl,cost = 2):
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		emit_signal("lvl_up",_stat)
-		hide()
+#		hide()

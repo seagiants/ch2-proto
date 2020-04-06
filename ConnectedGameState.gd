@@ -130,7 +130,7 @@ func generate_map(h,v):
 			var abilities = []
 			match type:
 				"MOUNTAIN":
-					abilities.append("working")
+					abilities.append({"ability_name":"working","atts":{}})
 			var tile = {
 				"type": type,
 				"index": Vector2(i,j),
@@ -205,7 +205,13 @@ func draw_new_paths(player_id, nb = 3, length = 3):
 
 func on_quest_finished():
 	advance_turn()
+	for player in get_players():
+		player.quest_state.queue_free()
 	var _changed = get_tree().change_scene("res://scenes/Shop/Shop.tscn")
+
+func on_quest_started():
+	for player in get_players():
+		player.init_quest()
 
 func on_player_died(player_id):
 	print("Player %s died !!!" % str(player_id))
@@ -232,4 +238,9 @@ func get_cell_abilities(pos):
 
 #Delete the mountain ability of working
 func tunnel_cell(pos):
-	get_map()[pos[0]][pos[1]].abilities.erase("working")
+	var i=0
+	var abilities = get_map()[pos[0]][pos[1]].abilities
+	for ability in abilities:
+		if ability.ability_name == "working":
+			abilities.remove(i)
+		i +=1

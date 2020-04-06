@@ -3,36 +3,36 @@
 		"type": "Hero",
 		"race" : "Human",
 		"name" : "Bob",
-		"abilities" : ["commerce"]
+		"abilities" : [{"ability_name":"commerce","atts":{}}]
 	},
 	"Forestier" : {
 		"type": "Hero",
 		"race" : "Elf",
 		"name" : "Maelys",
-        "abilities" : ["recolte_bois"]
+        "abilities" : [{"ability_name":"recolte_bois","atts":{}}]
     },
     "Banquier": {
         "type": "Hero",
 		"race" : "Human",
 		"name" : "Bill",
-        "abilities" : ["banque"]
+        "abilities" : [{"ability_name":"banque","atts":{}}]
     },
     "Archer": {
         "type": "Hero",
 		"race" : "Elf",
 		"name" : "Legolas",
-        "abilities" : ["rangedAttack"]
+        "abilities" : [{"ability_name":"rangedAttack","atts":{"attack":1}}]
     },
 	"Tunneler": {
         "type": "Hero",
 		"race" : "Dwarf",
 		"name" : "Gimli",
-        "abilities" : ["tunnel"]
+        "abilities" : [{"ability_name":"tunnel","atts":{}}]
     },
 	"MountainBanquier": {
         "type": "Hero",
 		"race" : "Dwarf",
 		"name" : "Tod",
-        "abilities" : ["greedy"]
+        "abilities" : [{"ability_name":"greedy","atts":{}}]
     },
 }

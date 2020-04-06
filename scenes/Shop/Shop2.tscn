@@ -25,7 +25,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="PathShopPanel" type="VSplitContainer" parent="HSplitContainer"]
+[node name="HeroShopPanel" type="VSplitContainer" parent="HSplitContainer"]
 margin_right = 499.0
 margin_bottom = 160.0
 size_flags_horizontal = 3
@@ -34,15 +34,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HSplitContainer/PathShopPanel"]
+[node name="Label" type="Label" parent="HSplitContainer/HeroShopPanel"]
 margin_right = 499.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-size_flags_vertical = 5
-text = "Pick your way"
+margin_bottom = 31.0
+text = "Welcome to the Hero shop! [V3]
+Drag hero to an empty space on your loco"
 
-[node name="PathShop" parent="HSplitContainer/PathShopPanel" instance=ExtResource( 3 )]
-margin_top = 26.0
+[node name="HeroShop" parent="HSplitContainer/HeroShopPanel" instance=ExtResource( 2 )]
+margin_top = 43.0
 margin_right = 499.0
 margin_bottom = 160.0
 
@@ -77,38 +76,38 @@ margin_right = 1022.0
 margin_bottom = 174.0
 rect_min_size = Vector2( 10, 10 )
 
-[node name="HeroShopPanel" type="VSplitContainer" parent="."]
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
 margin_top = 178.0
 margin_right = 1022.0
-margin_bottom = 349.0
+margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HeroShopPanel"]
+[node name="Label" type="Label" parent="VSplitContainer"]
 margin_right = 1022.0
-margin_bottom = 31.0
-text = "Welcome to the Hero shop! [V3]
-Drag hero to an empty space on your loco"
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Pick your way"
 
-[node name="HeroShop" parent="HeroShopPanel" instance=ExtResource( 2 )]
-margin_left = 0.0
-margin_top = 43.0
+[node name="PathShop" parent="VSplitContainer" instance=ExtResource( 3 )]
+margin_top = 26.0
 margin_right = 1022.0
-margin_bottom = 171.0
+margin_bottom = 102.0
 
 [node name="HSeparator3" type="HSeparator" parent="."]
-margin_top = 353.0
+margin_top = 284.0
 margin_right = 1022.0
-margin_bottom = 363.0
+margin_bottom = 294.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="PlayerBoardPanel" type="VSplitContainer" parent="."]
-margin_top = 367.0
+margin_top = 298.0
 margin_right = 1022.0
-margin_bottom = 501.0
+margin_bottom = 432.0
 
 [node name="Label" type="Label" parent="PlayerBoardPanel"]
 margin_right = 1022.0
@@ -125,26 +124,26 @@ margin_right = 1022.0
 margin_bottom = 134.0
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 505.0
+margin_top = 436.0
 margin_right = 1022.0
-margin_bottom = 515.0
+margin_bottom = 446.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="Log" type="Label" parent="."]
-margin_top = 519.0
+margin_top = 450.0
 margin_right = 1022.0
-margin_bottom = 533.0
+margin_bottom = 464.0
 
 [node name="HSeparator4" type="HSeparator" parent="."]
-margin_top = 537.0
+margin_top = 468.0
 margin_right = 1022.0
-margin_bottom = 547.0
+margin_bottom = 478.0
 rect_min_size = Vector2( 10, 10 )
 
 [node name="SimoneButton" type="Button" parent="."]
-margin_top = 551.0
+margin_top = 482.0
 margin_right = 1022.0
-margin_bottom = 571.0
+margin_bottom = 502.0
 text = "En voiture Simone !"
 script = ExtResource( 6 )
 [connection signal="pressed" from="SimoneButton" to="." method="_on_Simone_pressed"]

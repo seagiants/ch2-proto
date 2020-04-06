@@ -14,7 +14,8 @@ var _player_name = "John Doe" setget set_player_name, get_player_name
 var _heroes_level = 2 setget set_heroes_level, get_heroes_level
 var _paths_level = 2 setget set_paths_level, get_paths_level
 var _items_level = 0 setget set_items_level, get_items_level
-#var _move_index = 0 setget set_move_index,get_move_index
+var quest_state
+const QuestState = preload("questState.gd")
 
 #signal loco_stats_changed()
 signal player_died(player_id)
@@ -49,6 +50,10 @@ func update_from_json(json_player_state):
 		if key != "id":
 			var setter = funcref(self,"set"+key)
 			setter.call_func(json_player_state[key])	
+
+func init_quest():
+	quest_state = QuestState.new()
+	add_child(quest_state)
 
 func get_starting_position():
 	return Vector2(0,1+2*_index)
@@ -100,7 +105,6 @@ func get_working_turn():
 
 func add_working_turn(nworking_turn: int):
 	 set_working_turn(_working_turn + nworking_turn)
-
 
 func is_advancing():
 	return get_working_turn() == 0
@@ -261,4 +265,12 @@ func update_hero(ncaracs):
 			hp.insert(i,ncaracs)
 
 func resolve_attack(attack):
-	set_hp(get_hp()-attack)	
+	var def = quest_state.get_defence()
+	if def >= attack:
+		quest_state._defence -= attack
+	if def == 0:
+		set_hp(get_hp()-attack)	
+	if def > 0 and def < attack :
+		var new_attack = attack - def
+		quest_state._defence = 0
+		set_hp(get_hp()-new_attack)

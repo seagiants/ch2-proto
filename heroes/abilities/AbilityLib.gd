@@ -46,15 +46,15 @@ const Ability_Description = {
 func filter_abilities(tileType, abilities):
 	var nabilities = []
 	for ability in abilities:
-		var f = funcref(self,"%s_cond" % ability)
+		var f = funcref(self,"%s_cond" % ability.ability_name)
 		if f.call_func(tileType):
 			nabilities.append(ability)
 	return nabilities
 
-func resolve_ability(ability,player_state):
+func resolve_ability(ability,player_state,atts):
 	var f = funcref(self,"%s_resolver" % ability)
 	emit_signal("ability_resolved",player_state.get_name(),ability)
-	return f.call_func(player_state)
+	return f.call_func(player_state,atts)
 	
 func get_ability_description(ability_name):
 	return Ability_Description[ability_name]
@@ -62,7 +62,7 @@ func get_ability_description(ability_name):
 func commerce_cond(tile_type):
 	return tile_type == "PLAIN"
 	
-func commerce_resolver(state):
+func commerce_resolver(state,_atts):
 	print("Resolve commerce")
 	state.add_coin(1)
 	return state
@@ -70,7 +70,7 @@ func commerce_resolver(state):
 func recolte_bois_cond(tile_type):
 	return tile_type == "FOREST"
 	
-func recolte_bois_resolver(state):
+func recolte_bois_resolver(state,_atts):
 	print("Resolve recolte_bois")
 	state.add_power(1)
 	return state
@@ -79,7 +79,7 @@ func recolte_bois_resolver(state):
 func banque_cond(tile_type):
 	return tile_type == "PLAIN"
 
-func banque_resolver(state):
+func banque_resolver(state,_atts):
 	print("Resolving bank")
 	state.add_power(-1)
 	state.add_coin(2)
@@ -89,7 +89,7 @@ func banque_resolver(state):
 func tunnel_cond(tile_type):
 	return tile_type == "MOUNTAIN"
 
-func tunnel_resolver(state):
+func tunnel_resolver(state,_atts):
 	print("Resolving tunnel")
 #	print(state)
 	state.add_working_turn(-1)
@@ -99,7 +99,7 @@ func tunnel_resolver(state):
 func greedy_cond(tile_type):
 	return tile_type == "MOUNTAIN"
 
-func greedy_resolver(state):
+func greedy_resolver(state,_atts):
 	print("Resolving greedy")
 	state.add_coin(1)
 	return(state)
@@ -108,21 +108,27 @@ func greedy_resolver(state):
 func rangedAttack_cond(tile_type):
 	return tile_type == "FOREST"
 
-func rangedAttack_resolver(state):
+func rangedAttack_resolver(state,atts):
 	print("Resolve rangedAttack")
 	for player in GameState.get_players():
 		if player.get_name() != state.get_name():
-			player.resolve_attack(1)
+			player.resolve_attack(atts.attack)
 	return state
 
 # Working fns
 func working_cond(tile_type):
 	return tile_type == "MOUNTAIN"
 
-func working_resolver(state):
+func working_resolver(state,_atts):
 	print("Resolve working")
 	#A reprendre. Buggé.
 	state.set_working_turn(state.get_working_turn()+1)
 	GameState.tunnel_cell(state.get_loco_position())
 	return state
 	
+# Armored fns
+func armored_cond(tile_type):
+	return tile_type == "STATION"
+
+func armored_resolver(state,atts):
+	state.quest_state.set_armored(atts.armor)

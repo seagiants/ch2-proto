@@ -3,6 +3,7 @@ extends Node2D
 var map
 var _players_on_map
 
+signal quest_started()
 signal quest_finished()
 
 var _quest_log = []
@@ -16,6 +17,8 @@ func _ready():
 #		GameState.get_player(player_id).connect("player_stats_changed",self,"add_quest_log")
 #	map.connect("loco_exited",self,"on_loco_exited")
 	var _connect = self.connect("quest_finished",GameState,"on_quest_finished")
+	_connect = self.connect("quest_started",GameState,"on_quest_started")
+	emit_signal("quest_started")
 	
 static func sort_by_power(a, b):
 	if a.get_power() < b.get_power():
@@ -38,7 +41,7 @@ func resolve_player_turn(player_id):
 	var cell_type = start.type
 	#Resolve player's abilities
 	for ability in player.get_abilities(cell_type):
-		AbilityLib.resolve_ability(ability,player)
+		AbilityLib.resolve_ability(ability.ability_name,player,ability.atts)
 	#Check if still work to do
 	if not(player.is_advancing()):
 		player.do_work()
@@ -66,7 +69,8 @@ func resolve_player_turn(player_id):
 	if end != null :
 		cell_type = end.type
 		for ability in GameState.get_cell_abilities(pos_end):
-			AbilityLib.resolve_ability(ability,player)
+			print(ability)
+			AbilityLib.resolve_ability(ability.ability_name,player,ability.atts)
 		if end.type == "STATION":
 			_players_on_map.erase(player_id)
 			if _players_on_map.size() == 0:

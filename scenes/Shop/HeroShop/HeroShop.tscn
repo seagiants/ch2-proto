@@ -3,8 +3,11 @@
 [ext_resource path="res://scenes/Shop/HeroShop/HeroShop.gd" type="Script" id=1]
 
 [node name="Control" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -3.3241
+margin_top = 4.43214
+margin_right = 1016.68
+margin_bottom = 44.4321
+rect_min_size = Vector2( 0, 128 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

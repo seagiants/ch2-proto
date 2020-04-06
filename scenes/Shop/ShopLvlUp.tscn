@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/Shop/ShopLvlUp.gd" type="Script" id=2]
 [ext_resource path="res://assets/plus.png" type="Texture" id=3]
 
-[node name="TextureRect" type="TextureRect"]
+[node name="LvlUpButton" type="TextureRect"]
 margin_left = 16.0
 margin_top = 29.0
 margin_right = 80.0

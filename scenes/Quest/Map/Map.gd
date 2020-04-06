@@ -8,9 +8,9 @@ signal map_clicked(tile_index)
 #Used to retrieve picked path in pathShop
 var index = 0
 #To refactor : à consolider avec les conditions des abilités côté héros, là c'est quick&dirty
-var abilities = {
-	"MOUNTAIN" : ["working"]
-}
+#var abilities = {
+#	"MOUNTAIN" : [{"ability_name":"working","atts":{}}]
+#}
 
 
 func init():	
