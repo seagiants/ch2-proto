@@ -27,7 +27,7 @@ func _on_Simone_pressed():
 	var selected_path = $HSplitContainer/PathShopPanel/PathShop.get_path_selected()
 	if selected_path != null :
 		var player = GameState.get_player(player_id)
-		player.set_path(selected_path)
+		player.set_path(selected_path.path_preview)
 		emit_signal("player_ready_in_shop",player.player_state_to_json())
 #		GameState.players[1].set_path([0,0,0])
 #		var _changed = get_tree().change_scene("res://scenes/Quest/Quest.tscn")

@@ -1,11 +1,11 @@
-extends HBoxContainer
+extends Control
 
 const DragShop = preload("res://scenes/Shop/DragShop/DragShop.tscn")
 const LvlUpButton = preload("res://scenes/Shop/ShopLvlUp.tscn")
 const Map = preload("res://scenes/Quest/Map/Map.tscn")
 var shop
-var _path_selected_container_id = null
-#var paths
+var path_selected = null
+var paths
 var player_id 
 var lvl_up_button
 
@@ -22,28 +22,28 @@ func _ready():
 	lvl.init("path",player.get_heroes_level())
 	lvl.connect("lvl_up",self,"on_lvl_up")
 	lvl._lvl = player.get_heroes_level()
-	add_child(lvl)
+	shop.add_child(lvl)
 	lvl_up_button = lvl
 	var _conn= self.connect("path_lvl_up",player,"on_path_lvl_up")
-	#Add paths
-	for path in  GameState.draw_new_paths(player_id,nb):
+	#Add first paths
+	paths = GameState.draw_new_paths(player_id,nb)
+#	var paths = GameState.draw_new_paths()
+#	var index = 0
+	for path in  paths:
 #		add_path(path)
 		add_path(path,player_id)
 #		index  += 1
 
 #D'abord prendre une miniature de la map et ajouter les rails dessus
 func add_path(path: Array, nplayer_id):
+#	var path = PathFactory.get_item(paths)
 	var new_map = Map.instance()
 	new_map.preview()
-	new_map.set_mouse_filter(Control.MOUSE_FILTER_PASS)
+#	new_map.index = index
+	new_map.set_scale(Vector2(0.25,0.25))
+	new_map.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 #	new_map.preview = true
 #	var new = Control.new()
-#	var new_container = Container.new()
-#	new_container.rect_min_size =Vector2(96,128)
-#	new_container.add_child(new_map)
-#	add_child(new_container)
-#	new_map.rect_min_size =Vector2(96,128)
-	new_map.set_scale(Vector2(0.25,0.25))
 	shop.add_drag(new_map)
 	new_map.connect("map_clicked",self,"on_map_clicked")
 	new_map.init_rails(nplayer_id,path)
@@ -51,24 +51,23 @@ func add_path(path: Array, nplayer_id):
 
 #Buggée !!!!!!!!
 func get_path_selected():
-	if _path_selected_container_id != null:
-		return shop.get_node(_path_selected_container_id).get_child(0)
-	else:
-		return null
-
-func on_map_clicked(clicked_path_id):
-	var path = get_path_selected()
-	if path != null:
-		get_path_selected().modulate = Color(1,1,1,1)
-	if clicked_path_id != _path_selected_container_id :
-		_path_selected_container_id = clicked_path_id
-		get_path_selected().modulate = Color(1,1,1,0.5)
+	if path_selected != null :
+		return paths[path_selected]
 	else :
-		_path_selected_container_id = null
+		return null
+		
+func on_map_clicked(map_index):
+	if path_selected != null:
+		shop.get_child(path_selected).modulate = Color(1,1,1,1)
+	if map_index != path_selected :
+		path_selected = map_index
+		shop.get_child(map_index).modulate = Color(1,1,1,0.5)
+	else :
+		path_selected = null
 
 func on_lvl_up(_type_name):
 	var new_path = GameState.draw_new_paths(player_id,1)[0]
 	add_path(new_path,player_id)
-#	paths.append(new_path)
+	paths.append(new_path)
 	
 	emit_signal("path_lvl_up",player_id)

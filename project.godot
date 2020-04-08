@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "SimplePath",
 "language": "GDScript",
-"path": "res://scenes/Shop/PathShop/Path.gd"
+"path": "res://scenes/Shop/PathShop/Path_old.gd"
 } ]
 _global_script_class_icons={
 "SimplePath": ""

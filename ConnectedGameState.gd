@@ -237,7 +237,7 @@ func get_cell_abilities(pos):
 	return get_map()[pos[0]][pos[1]].abilities
 
 #Delete the mountain ability of working
-func tunnel_cell(pos):
+func add_tunnel_cell(pos):
 	var i=0
 	var abilities = get_map()[pos[0]][pos[1]].abilities
 	for ability in abilities:

@@ -4,7 +4,14 @@ const Item_Lib = {
 	"voltage" : {
 		"type" : "Item",
 		"name" : "voltage",
-		"description" : "Mettez un lion dans votre moteur"
+		"description" : "Mettez un lion dans votre moteur",
+		"abilities": []
+	},
+	"blindage" : {
+		"type" : "Item",
+		"name" : "blindage",
+		"description" : "+1 Defense",
+		"abilities": [{"ability_name":"armored","atts":{"armor":2}}]
 	}
 }
 

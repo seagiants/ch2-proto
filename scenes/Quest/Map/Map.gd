@@ -1,7 +1,8 @@
-extends Control
+extends Container
 const Tile = preload("res://scenes/Quest/tiles/tile.gd")
 const Loco = preload("res://scenes/Quest/tiles/tilesSprite/LocoTiles.tscn")
-
+#Used to retrieve the selected path in shop
+var path_preview
 #signal loco_exited(player_index)
 signal map_clicked(tile_index)
 
@@ -50,6 +51,7 @@ func init_map(map : Array, _is_preview = false):
 func init_rails(player_id, path =null):
 	if path == null :
 		path = GameState.get_player(player_id).get_path()
+	path_preview = path
 	var cells = []
 	var next = GameState.get_player(player_id).get_loco_position() 
 	cells.append(next)
@@ -67,9 +69,8 @@ func pos_to_name(pos: Vector2):
 	var text = str(pos[0])+"x"+str(pos[1]) 
 	return text
 
-func on_tile_clicked(_ctile):	
-	emit_signal("map_clicked",get_parent().get_position_in_parent())
-
+func on_tile_clicked(_ctile):
+	emit_signal("map_clicked",get_parent().get_name())
 func get_loco_tile(player_index):
 	var start = GameState.get_player(player_index).get_loco_position()
 	var out = get_node(pos_to_name(start)) 

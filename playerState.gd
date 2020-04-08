@@ -165,6 +165,9 @@ func add_item(item):
 func get_abilities(tileType = null):
 	var abilityLib = preload("res://heroes/abilities/AbilityLib.gd").new()
 	var abilities = []
+	for item in _itemPool:
+		for ability in abilityLib.filter_abilities(tileType,item.abilities):
+			abilities.append(ability)
 	for hero in _heroPool:
 		for ability in abilityLib.filter_abilities(tileType,hero.abilities):
 			abilities.append(ability)

@@ -19,20 +19,31 @@ func _ready():
 	var _connect = self.connect("quest_finished",GameState,"on_quest_finished")
 	_connect = self.connect("quest_started",GameState,"on_quest_started")
 	emit_signal("quest_started")
+	#Resoudre les abilités de tous les joueurs. A refactor (nom de méthode foireux)
+	on_map_clicked(null,true)
+	
+func resolve_player_abilities(player_id):
+	var player = GameState.get_player(player_id)
+	for ability in player.get_abilities(map.get_loco_tile(player.get_name()).type):
+		AbilityLib.resolve_ability(ability.ability_name,player,ability.atts)
 	
 static func sort_by_power(a, b):
 	if a.get_power() < b.get_power():
 		return true	 
 	return false
 	
-func on_map_clicked(_tile_index):
+func on_map_clicked(_tile_index, starting = false):
 	var sorted_players = GameState.get_players()
 	sorted_players.sort_custom(self,"sort_by_power") 
 	for player in sorted_players:
 		var player_id = player.get_name()
 		if not(player_id in _players_on_map):
 			return
-		resolve_player_turn(player_id)
+		#If starting on ne bouge pas, on résoud juste les abilities initiales (STATION)
+		if starting == true :
+			resolve_player_abilities(player_id)
+		else:
+			resolve_player_turn(player_id)
 
 func resolve_player_turn(player_id):
 	#Init vars
@@ -40,8 +51,9 @@ func resolve_player_turn(player_id):
 	var start = map.get_loco_tile(player_id)
 	var cell_type = start.type
 	#Resolve player's abilities
-	for ability in player.get_abilities(cell_type):
-		AbilityLib.resolve_ability(ability.ability_name,player,ability.atts)
+	resolve_player_abilities(player_id)
+#	for ability in player.get_abilities(cell_type):
+#		AbilityLib.resolve_ability(ability.ability_name,player,ability.atts)
 	#Check if still work to do
 	if not(player.is_advancing()):
 		player.do_work()

@@ -37,9 +37,14 @@ const Ability_Description = {
 		"icon" : "MOUNTAIN"
 	},
 	"working": {
-		"name": "Montagne",
+		"name": "Working",
 		"description" : "Du boulot pour 1 tour...",
 		"icon" : "MOUNTAIN"
+	},
+	"armored": {
+		"name": "Blindage",
+		"description" : "Blindé comme les blés",
+		"icon": "STATION"
 	}
 }
 
@@ -123,7 +128,7 @@ func working_resolver(state,_atts):
 	print("Resolve working")
 	#A reprendre. Buggé.
 	state.set_working_turn(state.get_working_turn()+1)
-	GameState.tunnel_cell(state.get_loco_position())
+	GameState.add_tunnel_cell(state.get_loco_position())
 	return state
 	
 # Armored fns
@@ -131,4 +136,4 @@ func armored_cond(tile_type):
 	return tile_type == "STATION"
 
 func armored_resolver(state,atts):
-	state.quest_state.set_armored(atts.armor)
+	state.quest_state.set_defence(atts.armor)
